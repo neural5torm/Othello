@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "Othello.Console": {
+      "commandName": "Project",
+    }
+  }
+}

@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Othello.SpecTests", "Othello.SpecTests\Othello.SpecTests.csproj", "{E222046B-2BEB-4909-85BB-D10158A9C739}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Othello.ValueObjects", "Othello.ValueObjects\Othello.ValueObjects.csproj", "{C36EF5B3-8EC9-44E8-8430-64909ED46676}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Othello.RuleEngine", "Othello.RuleEngine\Othello.RuleEngine.csproj", "{81322155-24DC-4228-97A4-749FCB8F4014}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Othello.ConsoleApp", "Othello.ConsoleApp\Othello.ConsoleApp.csproj", "{2D18657F-A179-4766-9EF6-706C11F0DF15}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E222046B-2BEB-4909-85BB-D10158A9C739}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E222046B-2BEB-4909-85BB-D10158A9C739}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E222046B-2BEB-4909-85BB-D10158A9C739}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E222046B-2BEB-4909-85BB-D10158A9C739}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C36EF5B3-8EC9-44E8-8430-64909ED46676}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C36EF5B3-8EC9-44E8-8430-64909ED46676}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C36EF5B3-8EC9-44E8-8430-64909ED46676}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C36EF5B3-8EC9-44E8-8430-64909ED46676}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81322155-24DC-4228-97A4-749FCB8F4014}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81322155-24DC-4228-97A4-749FCB8F4014}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81322155-24DC-4228-97A4-749FCB8F4014}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81322155-24DC-4228-97A4-749FCB8F4014}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D18657F-A179-4766-9EF6-706C11F0DF15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D18657F-A179-4766-9EF6-706C11F0DF15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D18657F-A179-4766-9EF6-706C11F0DF15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D18657F-A179-4766-9EF6-706C11F0DF15}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {77D9D797-B7FD-476E-AE3C-BAA252759F93}
+	EndGlobalSection
+EndGlobal
