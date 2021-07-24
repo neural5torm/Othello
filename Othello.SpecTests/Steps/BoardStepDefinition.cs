@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Othello.RuleEngine;
+using Othello.SpecTests.Extensions;
 using Othello.ValueObjects;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,17 @@ namespace Othello.SpecTests.Steps
         [When(@"I create an empty Othello board")]
         public void WhenICreateAnEmptyOthelloBoard()
         {
-            var board = new Board(Dimensions.WithColumns(8).AndRows(8));
+            var board = new Board(8);
+
+            scenarioContext.Add(BoardKey, board);
+        }
+
+        [When(@"I create an initial Othello board")]
+        public void WhenICreateAnInitialOthelloBoard()
+        {
+            var board = new Board(8);
+
+            board.SetInitialState();
 
             scenarioContext.Add(BoardKey, board);
         }
@@ -37,14 +48,21 @@ namespace Othello.SpecTests.Steps
         {
             var board = scenarioContext.Get<Board>(BoardKey);
 
-            board.Dimensions
-                .RowCount
-                .Should().Be(table.RowCount);
+            foreach (var row in table.Rows)
+            {
+                var rowHeader = row[0];
 
-            board.Dimensions
-                .ColumnCount
-                .Should().Be(table.Rows[0].Values.Count - 1);
+                foreach (var columnHeader in table.Header.Skip(1))
+                {
+                    var expectedDisc = row[columnHeader].ToDisc();
+                    string position = columnHeader + rowHeader;
+
+                    board[position]
+                        .Disc
+                        .Should()
+                        .Be(expectedDisc, $"{expectedDisc} disc is expected at {position}");
+                }
+            }
         }
-
     }
 }

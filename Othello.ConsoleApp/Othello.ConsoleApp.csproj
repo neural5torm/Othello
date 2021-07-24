@@ -8,5 +8,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Othello.RuleEngine\Othello.RuleEngine.csproj" />
   </ItemGroup>
-
 </Project>

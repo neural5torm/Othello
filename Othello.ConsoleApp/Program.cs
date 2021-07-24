@@ -34,7 +34,7 @@ namespace Othello.ConsoleApp
             Console.WriteLine("I, the Computer, am playing White \u25CB.");
             Console.WriteLine("You begin.");
             
-            var board = new Board(Dimensions.WithColumns(8).AndRows(8));
+            var board = new Board(8);
         }
     }
 }

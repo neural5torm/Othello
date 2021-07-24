@@ -75,12 +75,6 @@ namespace Othello.SpecTests
             testRunner.CollectScenarioErrors();
         }
         
-        public virtual void FeatureBackground()
-        {
-#line 3
-#line hidden
-        }
-        
         void System.IDisposable.Dispose()
         {
             this.TestTearDown();
@@ -114,22 +108,19 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 3
-this.FeatureBackground();
-#line hidden
 #line 6
  testRunner.When("I create an empty Othello board", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                             "",
-                            "A",
-                            "B",
-                            "C",
-                            "D",
-                            "E",
-                            "F",
-                            "G",
-                            "H"});
+                            "a",
+                            "b",
+                            "c",
+                            "d",
+                            "e",
+                            "f",
+                            "g",
+                            "h"});
                 table1.AddRow(new string[] {
                             "1",
                             "",
@@ -212,6 +203,137 @@ this.FeatureBackground();
                             ""});
 #line 7
  testRunner.Then("the board should look like", ((string)(null)), table1, "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Creating an initial Othello board should display an 8x8 grid of squares with its " +
+            "2x2 center containing the initial black and white discs")]
+        [Xunit.TraitAttribute("FeatureTitle", "Create Othello board")]
+        [Xunit.TraitAttribute("Description", "Creating an initial Othello board should display an 8x8 grid of squares with its " +
+            "2x2 center containing the initial black and white discs")]
+        public virtual void CreatingAnInitialOthelloBoardShouldDisplayAn8X8GridOfSquaresWithIts2X2CenterContainingTheInitialBlackAndWhiteDiscs()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Creating an initial Othello board should display an 8x8 grid of squares with its " +
+                    "2x2 center containing the initial black and white discs", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 18
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 19
+ testRunner.When("I create an initial Othello board", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                            "",
+                            "a",
+                            "b",
+                            "c",
+                            "d",
+                            "e",
+                            "f",
+                            "g",
+                            "h"});
+                table2.AddRow(new string[] {
+                            "1",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            ""});
+                table2.AddRow(new string[] {
+                            "2",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            ""});
+                table2.AddRow(new string[] {
+                            "3",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            ""});
+                table2.AddRow(new string[] {
+                            "4",
+                            "",
+                            "",
+                            "",
+                            "W",
+                            "B",
+                            "",
+                            "",
+                            ""});
+                table2.AddRow(new string[] {
+                            "5",
+                            "",
+                            "",
+                            "",
+                            "B",
+                            "W",
+                            "",
+                            "",
+                            ""});
+                table2.AddRow(new string[] {
+                            "6",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            ""});
+                table2.AddRow(new string[] {
+                            "7",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            ""});
+                table2.AddRow(new string[] {
+                            "8",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            ""});
+#line 20
+ testRunner.Then("the board should look like", ((string)(null)), table2, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
