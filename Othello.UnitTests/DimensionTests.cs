@@ -11,7 +11,7 @@ namespace Othello.UnitTests
         [InlineData(8)]
         [InlineData(2)]
         [InlineData(26)]
-        public void CreateValidDimension(int sideLength)
+        public void CreateValidDimension(sbyte sideLength)
         {
             // Act
             int dimension = new Dimension(sideLength);
@@ -26,7 +26,7 @@ namespace Othello.UnitTests
         [InlineData(0)]
         [InlineData(1)]
         [InlineData(27)]
-        public void CreateInvalidDimension(int length)
+        public void CreateInvalidDimension(sbyte length)
         {
             // Act
             Action create = () => _ = new Dimension(length);

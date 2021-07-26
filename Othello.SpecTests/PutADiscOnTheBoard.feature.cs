@@ -19,7 +19,7 @@ namespace Othello.SpecTests
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class CreateOthelloBoardFeature : object, Xunit.IClassFixture<CreateOthelloBoardFeature.FixtureData>, System.IDisposable
+    public partial class PutADiscOnTheBoardFeature : object, Xunit.IClassFixture<PutADiscOnTheBoardFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -28,10 +28,10 @@ namespace Othello.SpecTests
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "CreateOthelloBoard.feature"
+#line 1 "PutADiscOnTheBoard.feature"
 #line hidden
         
-        public CreateOthelloBoardFeature(CreateOthelloBoardFeature.FixtureData fixtureData, Othello_SpecTests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public PutADiscOnTheBoardFeature(PutADiscOnTheBoardFeature.FixtureData fixtureData, Othello_SpecTests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -40,7 +40,7 @@ namespace Othello.SpecTests
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "", "Create Othello board", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "", "Put a disc on the board", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -75,23 +75,32 @@ namespace Othello.SpecTests
             testRunner.CollectScenarioErrors();
         }
         
+        public virtual void FeatureBackground()
+        {
+#line 3
+#line hidden
+#line 4
+ testRunner.Given("an initial board is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+        }
+        
         void System.IDisposable.Dispose()
         {
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Creating an initial Othello board should display an 8x8 grid of squares with its " +
-            "2x2 center containing the initial black and white discs")]
-        [Xunit.TraitAttribute("FeatureTitle", "Create Othello board")]
-        [Xunit.TraitAttribute("Description", "Creating an initial Othello board should display an 8x8 grid of squares with its " +
-            "2x2 center containing the initial black and white discs")]
-        public virtual void CreatingAnInitialOthelloBoardShouldDisplayAn8X8GridOfSquaresWithIts2X2CenterContainingTheInitialBlackAndWhiteDiscs()
+        [Xunit.SkippableFactAttribute(DisplayName="Black places a disc in c4 on the initial board which should flip the sandwiched w" +
+            "hite disc in d4")]
+        [Xunit.TraitAttribute("FeatureTitle", "Put a disc on the board")]
+        [Xunit.TraitAttribute("Description", "Black places a disc in c4 on the initial board which should flip the sandwiched w" +
+            "hite disc in d4")]
+        public virtual void BlackPlacesADiscInC4OnTheInitialBoardWhichShouldFlipTheSandwichedWhiteDiscInD4()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Creating an initial Othello board should display an 8x8 grid of squares with its " +
-                    "2x2 center containing the initial black and white discs", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 3
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Black places a disc in c4 on the initial board which should flip the sandwiched w" +
+                    "hite disc in d4", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 7
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -111,10 +120,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 4
- testRunner.When("I create an initial Othello board", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 3
+this.FeatureBackground();
 #line hidden
-                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+#line 8
+ testRunner.When("Black places a disc in square c4", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                             "",
                             "a",
                             "b",
@@ -124,7 +136,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "f",
                             "g",
                             "h"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "1",
                             "",
                             "",
@@ -134,7 +146,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "",
                             "",
                             ""});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "2",
                             "",
                             "",
@@ -144,7 +156,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "",
                             "",
                             ""});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "3",
                             "",
                             "",
@@ -154,17 +166,17 @@ this.ScenarioInitialize(scenarioInfo);
                             "",
                             "",
                             ""});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "4",
                             "",
                             "",
-                            "",
-                            "W",
+                            "B",
+                            "B",
                             "B",
                             "",
                             "",
                             ""});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "5",
                             "",
                             "",
@@ -174,7 +186,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "",
                             "",
                             ""});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "6",
                             "",
                             "",
@@ -184,7 +196,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "",
                             "",
                             ""});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "7",
                             "",
                             "",
@@ -194,7 +206,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "",
                             "",
                             ""});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "8",
                             "",
                             "",
@@ -204,8 +216,52 @@ this.ScenarioInitialize(scenarioInfo);
                             "",
                             "",
                             ""});
-#line 5
- testRunner.Then("the board should look like", ((string)(null)), table1, "Then ");
+#line 9
+ testRunner.Then("the board should look like", ((string)(null)), table2, "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Placing a black disc anywhere in the central 2x2 grid of the initial board should" +
+            " issue an error saying that the square is already filled")]
+        [Xunit.TraitAttribute("FeatureTitle", "Put a disc on the board")]
+        [Xunit.TraitAttribute("Description", "Placing a black disc anywhere in the central 2x2 grid of the initial board should" +
+            " issue an error saying that the square is already filled")]
+        public virtual void PlacingABlackDiscAnywhereInTheCentral2X2GridOfTheInitialBoardShouldIssueAnErrorSayingThatTheSquareIsAlreadyFilled()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Placing a black disc anywhere in the central 2x2 grid of the initial board should" +
+                    " issue an error saying that the square is already filled", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 22
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 3
+this.FeatureBackground();
+#line hidden
+#line 24
+ testRunner.When("Black tries to place a disc in square d4", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 25
+ testRunner.Then("an error is issued saying \"You cannot put a disc in an already filled square.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -218,12 +274,12 @@ this.ScenarioInitialize(scenarioInfo);
             
             public FixtureData()
             {
-                CreateOthelloBoardFeature.FeatureSetup();
+                PutADiscOnTheBoardFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                CreateOthelloBoardFeature.FeatureTearDown();
+                PutADiscOnTheBoardFeature.FeatureTearDown();
             }
         }
     }

@@ -3,9 +3,7 @@ using Othello.RuleEngine;
 using Othello.SpecTests.Extensions;
 using Othello.ValueObjects;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TechTalk.SpecFlow;
 
 namespace Othello.SpecTests.Steps
@@ -14,8 +12,7 @@ namespace Othello.SpecTests.Steps
     public sealed class BoardStepDefinition
     {
         private const string BoardKey = "board";
-
-        // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
+        private const string ErrorKey = "error";
 
         private readonly ScenarioContext scenarioContext;
 
@@ -25,28 +22,45 @@ namespace Othello.SpecTests.Steps
         }
 
 
-        [When(@"I create an empty Othello board")]
-        public void WhenICreateAnEmptyOthelloBoard()
+        [Given(@"an initial board is created")]
+        public void GivenAnInitialBoardIsCreated()
         {
-            var board = new Board(8);
-
-            scenarioContext.Add(BoardKey, board);
+            CreateInitialOthelloBoard();
         }
+
 
         [When(@"I create an initial Othello board")]
         public void WhenICreateAnInitialOthelloBoard()
         {
-            var board = new Board(8);
+            CreateInitialOthelloBoard();
+        }
 
-            board.SetInitialState();
+        [When(@"Black places a disc in square (.{2})")]
+        public void WhenBlackPlacesADiscInSquare(string position)
+        {
+            var board = GetBoard();
+            board.PlaceDiscInSquareForPlayer(Disc.BlackSideUp, position);
+        }
 
-            scenarioContext.Add(BoardKey, board);
+        [When(@"Black tries to place a disc in square (.{2})")]
+        public void WhenBlackTriesToPlaceADiscInSquare(string position)
+        {
+            var board = GetBoard();
+
+            try
+            {
+                board.PlaceDiscInSquareForPlayer(Disc.BlackSideUp, position);
+            }
+            catch (Exception e)
+            {
+                StoreError(e);
+            }
         }
 
         [Then(@"the board should look like")]
         public void ThenTheBoardShouldLookLike(Table table)
         {
-            var board = scenarioContext.Get<Board>(BoardKey);
+            var board = GetBoard();
 
             foreach (var row in table.Rows)
             {
@@ -63,6 +77,44 @@ namespace Othello.SpecTests.Steps
                         .Be(expectedDisc, $"{expectedDisc} disc is expected at {position}");
                 }
             }
+
+            CheckNoError();
         }
+
+        [Then(@"an error is issued saying ""(.*)""")]
+        public void ThenAnErrorIsIssuedSaying(string errorMessage)
+        {
+            var error = GetError();
+            error.Message
+                .Should()
+                .Be(errorMessage);
+        }
+
+
+        private void CreateInitialOthelloBoard()
+        {
+            var board = new Board(8);
+            scenarioContext.Add(BoardKey, board);
+        }
+        private Board GetBoard()
+        {
+            return scenarioContext.Get<Board>(BoardKey);
+        }
+
+        private void StoreError(Exception e)
+        {
+            scenarioContext.Add(ErrorKey, e);
+        }
+        private Exception GetError()
+        {
+            return scenarioContext.Get<Exception>(ErrorKey);
+        }
+        private void CheckNoError()
+        {
+            scenarioContext.ContainsKey(ErrorKey)
+                .Should()
+                .BeFalse();
+        }
+
     }
 }

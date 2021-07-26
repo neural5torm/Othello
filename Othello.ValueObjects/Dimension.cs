@@ -4,22 +4,22 @@ namespace Othello.ValueObjects
 {
     public class Dimension
     {
-        public const uint MinDimension = 2;
-        public const uint MaxDimension = 26;
+        public const sbyte MinDimension = 2;
+        public const sbyte MaxSideLength = 26;
 
-        private readonly uint sideLength;
+        private readonly sbyte sideLength;
 
         public Dimension(int sideLength)
         {
-            this.sideLength = MinDimension <= sideLength && sideLength <= MaxDimension
-                ? (uint)sideLength
+            this.sideLength = MinDimension <= sideLength && sideLength <= MaxSideLength
+                ? (sbyte)sideLength
                 : throw new ArgumentOutOfRangeException(nameof(sideLength));
         }
 
         public static implicit operator int(Dimension dimension)
-            => (int)dimension.sideLength;
+            => dimension.sideLength;
 
-        public static implicit operator Dimension(int sideLength)
+        public static implicit operator Dimension(sbyte sideLength)
             => new(sideLength);
     }
 }

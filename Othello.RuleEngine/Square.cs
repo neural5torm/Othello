@@ -13,12 +13,12 @@ namespace Othello.RuleEngine
             Position = position;
         }
 
-        public void Put(Disc disc)
+        public void PlaceDisc(Disc disc)
         {
             if (disc == Disc.None)
-                throw new InvalidOperationException("Cannot remove a disc from a square.");
+                throw new InvalidOperationException("You cannot remove a disc from a square.");
             if (IsFilled)
-                throw new InvalidOperationException("Cannot put a disc in an already filled square.");
+                throw new InvalidOperationException("You cannot put a disc in an already filled square.");
 
             Disc = disc;
         }
@@ -26,11 +26,9 @@ namespace Othello.RuleEngine
         public void FlipDisc()
         {
             if (IsEmpty)
-                throw new InvalidOperationException("Cannot flip the disc of an empty square.");
+                throw new InvalidOperationException("You cannot flip the disc of an empty square.");
 
-            Disc = (Disc == Disc.BlackSideUp)
-                ? Disc.WhiteSideUp
-                : Disc.BlackSideUp;
+            Disc = Disc.Flipped();
         }
 
         public bool IsEmpty => Disc == Disc.None;
@@ -38,5 +36,8 @@ namespace Othello.RuleEngine
 
         public bool IsBlackFacingUp => Disc == Disc.BlackSideUp;
         public bool IsWhiteFacingUp => Disc == Disc.WhiteSideUp;
+
+        internal bool HasDisc(Disc disc)
+            => Disc == disc;
     }
 }

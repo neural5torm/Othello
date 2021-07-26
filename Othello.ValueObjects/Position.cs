@@ -14,43 +14,65 @@ namespace Othello.ValueObjects
     /// In standard Othello,
     /// columns go from a to h (left to right) and
     /// rows go from 1 to 8 (top to bottom).
+    /// 
+    /// Internally uses sbyte Column and Row properties for easy mathematical manipulation.
     /// </summary>
-    public record Position(char Column, uint Row)
+    public sealed record Position(sbyte Column, sbyte Row)
     {
-        private char Column { get; } = Column.ToString().ToLower().Single() >= 'a' && Column.ToString().ToLower().Single() <= 'z'
-            ? Column.ToString().ToLower().Single()
+        sbyte Column { get; } 
+            = Index.MinIndex <= Column && Column <= Index.MaxIndex
+            ? Column
             : throw new ArgumentOutOfRangeException(nameof(Column));
 
-        private uint Row { get; } = Row >= 1
+        sbyte Row { get; } 
+            = Index.MinIndex <= Row && Row <= Index.MaxIndex
             ? Row
             : throw new ArgumentOutOfRangeException(nameof(Row));
 
-
         public Position(string column, int row)
-            : this(column.Trim().Single(),
-                  (uint)row)
+            : this(column.ToColumnIndex(), (sbyte)row)
         {
-            if (row < 1)
+            var columnIndex = column.ToColumnIndex();
+            if (columnIndex < sbyte.MinValue || sbyte.MaxValue < columnIndex )
+                throw new ArgumentOutOfRangeException(nameof(column));
+
+            if (row < sbyte.MinValue || sbyte.MaxValue < row)
                 throw new ArgumentOutOfRangeException(nameof(row));
         }
 
-        private Position(int column, int row)
-            : this((char)((short)'a' + column - 1), 
-                  (uint)row)
+        public bool IsValidForDimension(Dimension dimension)
         {
+            return Column < Index.MinIndex + dimension &&
+                Row < Index.MinIndex + dimension;
+        }
+
+        public Position? NextPosition(Direction direction)
+        {
+            if (this == Origin &&
+                (direction == Direction.North ||
+                direction == Direction.NorthEast ||
+                direction == Direction.SouthWest ||
+                direction == Direction.West ||
+                direction == Direction.NorthWest))
+                return null;
+
+            var change = direction.ToPositionChange();
+            return new((sbyte)(Column + change.ColumnDelta), 
+                (sbyte)(Row + change.RowDelta));
         }
 
         public override string ToString()
             => this;
 
         public static implicit operator string(Position position)
-            => $"{position.Column}{position.Row}";
+            => $"{position.Column.ToColumnName()}{position.Row}";
 
         public static implicit operator Position(string position)
         {
             var trimmed = position.Trim();
-            var column = trimmed.First();
-            var row = uint.Parse(trimmed[1..]);
+
+            var column = trimmed[..1];
+            var row = int.Parse(trimmed[1..]);
 
             return new(column, row);
         }
@@ -61,9 +83,11 @@ namespace Othello.ValueObjects
             {
                 foreach (var rowIndex in Enumerable.Range(1, boardDimension))
                 {
-                    yield return new Position(columnIndex, rowIndex);
+                    yield return new((sbyte)columnIndex, (sbyte)rowIndex);
                 }
             }
         }
+
+        public static Position Origin => new(Index.MinIndex, Index.MinIndex);
     }
 }

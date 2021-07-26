@@ -7,64 +7,29 @@ using Xunit;
 namespace Othello.UnitTests
 {
     public class PositionTests
-    {
+    {      
         [Theory]
-        [InlineData('a', 1, 'a')]
-        [InlineData('A', 8, 'a')]
-        [InlineData('z', 2, 'z')]
-        public void CreatePositionWithValidCharColumnAndUIntRow(char column, uint row, char expectedColumn)
+        [InlineData("a", 1, "a1")]
+        [InlineData("A ", 18, "a18")]
+        [InlineData(" Z  ", 26, "z26")]
+        public void CreatePositionWithValidStringColumnAndIntegerRow(string column, int row, string expected)
         {
             // Act
             var position = new Position(column, row);
-
+            
             // Assert
-            position
+            position.ToString()
                 .Should()
-                .BeEquivalentTo(new
-                {
-                    Column = expectedColumn,
-                    Row = row
-                });
+                .Be(expected);
         }
 
         [Theory]
-        [InlineData(' ', 1)]
-        [InlineData('é', 1)]
-        [InlineData('A', 0)]
-        public void CreatePositionWithInvalidCharColumnOrUIntRow(char column, uint row)
-        {
-            // Act
-            Action create = () => _ = new Position(column, row);
-
-            // Assert
-            create
-                .Should()
-                .Throw<Exception>();
-        }
-
-        [Theory]
-        [InlineData("a", 1, 'a')]
-        [InlineData("A", 8, 'a')]
-        [InlineData(" A  ", 2, 'a')]
-        public void CreatePositionWithValidStringColumnAndIntegerRow(string column, int row, char expectedColumn)
-        {
-            // Act
-            var position = new Position(column, row);
-
-            // Assert
-            position
-                .Should()
-                .BeEquivalentTo(new
-                {
-                    Column = expectedColumn,
-                    Row = row
-                });
-        }
-
-        [Theory]
+        [InlineData("A:", 1)]
         [InlineData("AA", 1)]
         [InlineData("A", 0)]
-        [InlineData("A", -1)]
+        [InlineData("A", 27)]
+        [InlineData("A", -255)]
+        [InlineData("A", 257)]
         public void CreatePositionWithInvalidStringColumnOrIntegerRow(string column, int row)
         {
             // Act
@@ -77,28 +42,27 @@ namespace Othello.UnitTests
         }
 
         [Theory]
-        [InlineData("a1", 'a', 1u)]
-        [InlineData("A01", 'a', 1u)]
-        [InlineData("A 10", 'a', 10u)]
-        [InlineData(" h8  ", 'h', 8u)]
-        public void ConvertValidStringToPosition(string stringPosition, char expectedColumn, uint expectedRow)
+        [InlineData("a1", "a1")]
+        [InlineData("A01", "a1")]
+        [InlineData("A 10", "a10")]
+        [InlineData(" h8  ", "h8")]
+        public void ConvertValidStringToPosition(string stringPosition, string expected)
         {
             // Act
             Position position = stringPosition;
 
             // Assert
-            position
+            position.ToString()
                 .Should()
-                .BeEquivalentTo(new
-                {
-                    Column = expectedColumn,
-                    Row = expectedRow
-                });
+                .Be(expected);
         }
 
         [Theory]
         [InlineData("aa1")]
         [InlineData("a0")]
+        [InlineData("a27")]
+        [InlineData("a-255")]
+        [InlineData("a257")]
         [InlineData("a-1")]
         [InlineData("h:8")]
         public void ConvertInvalidStringToPosition(string stringPosition)
@@ -114,7 +78,8 @@ namespace Othello.UnitTests
 
         [Theory]
         [InlineData(2, new string[] { "a1", "a2", "b1", "b2" })]
-        public void EnumerateAllPositionOnBoard(int dimension, string[] expectedPositions)
+        [InlineData(3, new string[] { "a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3" })]
+        public void EnumerateAllPositionsForBoardDimension(sbyte dimension, string[] expectedPositions)
         {
             // Act
             var positions = Position.AllPositionsForBoardDimension(dimension);
@@ -122,6 +87,47 @@ namespace Othello.UnitTests
             // Assert
             positions.Should()
                 .BeEquivalentTo(expectedPositions.Select(e => (Position)e));
+        }
+
+        [Theory]
+        [InlineData("b2", Direction.North, "b1")]
+        [InlineData("b2", Direction.NorthEast, "c1")]
+        [InlineData("a1", Direction.East, "b1")]
+        [InlineData("a1", Direction.SouthEast, "b2")]
+        [InlineData("a1", Direction.South, "a2")]
+        [InlineData("b2", Direction.SouthWest, "a3")]
+        [InlineData("b2", Direction.West, "a2")]
+        [InlineData("b2", Direction.NorthWest, "a1")]
+        public void GetNextPositionWithValidDirection(string from, Direction direction, string expectedNextPosition)
+        {
+            // Arrange
+            Position fromPosition = from;
+
+            // Act
+            var nextPosition = fromPosition.NextPosition(direction);
+
+            // Assert
+            nextPosition.Should()
+                .Be((Position)expectedNextPosition);
+        }
+
+        [Theory]
+        [InlineData(Direction.North)]
+        [InlineData(Direction.NorthEast)]
+        [InlineData(Direction.SouthWest)]
+        [InlineData(Direction.West)]
+        [InlineData(Direction.NorthWest)]
+        public void GetNextPositionWithInvalidDirection(Direction direction)
+        {
+            // Arrange
+            Position origin = "a1";
+            
+            // Act
+            var nextPosition = origin.NextPosition(direction);
+
+            // Assert
+            nextPosition.Should()
+                .BeNull();
         }
     }
 }
