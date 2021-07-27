@@ -35,11 +35,19 @@ namespace Othello.SpecTests.Steps
             CreateInitialOthelloBoard();
         }
 
+        [When(@"I create an initial (.+x.+) Othello board")]
+        public void WhenICreateAnInitialOthelloBoard(string dimensions)
+        {
+            int dimension = int.Parse(dimensions.Split("x").First());
+            CreateInitialOthelloBoard(dimension);
+        }
+
+
         [When(@"Black places a disc in square (.{2})")]
         public void WhenBlackPlacesADiscInSquare(string position)
         {
             var board = GetBoard();
-            board.PlaceDiscInSquareForPlayer(Disc.BlackSideUp, position);
+            board.PlayMove(Disc.BlackSideUp, position);
         }
 
         [When(@"Black tries to place a disc in square (.{2})")]
@@ -49,7 +57,7 @@ namespace Othello.SpecTests.Steps
 
             try
             {
-                board.PlaceDiscInSquareForPlayer(Disc.BlackSideUp, position);
+                board.PlayMove(Disc.BlackSideUp, position);
             }
             catch (Exception e)
             {
@@ -91,9 +99,9 @@ namespace Othello.SpecTests.Steps
         }
 
 
-        private void CreateInitialOthelloBoard()
+        private void CreateInitialOthelloBoard(int dimension = 8)
         {
-            var board = new Board(8);
+            var board = new Board(dimension);
             scenarioContext.Add(BoardKey, board);
         }
         private Board GetBoard()

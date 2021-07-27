@@ -30,13 +30,13 @@ namespace Othello.RuleEngine
         }
 
         // TODO pass the player (for scores and turns)
-        public void PlaceDiscInSquareForPlayer(Disc disc, Position squarePosition)
+        public void PlayMove(Disc disc, Position squarePosition)
         {
-            Square square = PlaceDiscInSquare(disc, squarePosition);
+            Square square = PlaceDisc(disc, squarePosition);
             FlipDiscsSandwichedByNewDisc(square);
         }
 
-        private Square PlaceDiscInSquare(Disc disc, Position squarePosition)
+        private Square PlaceDisc(Disc disc, Position squarePosition)
         {
             var square = this[squarePosition];
             square.PlaceDisc(disc);
@@ -102,13 +102,35 @@ namespace Othello.RuleEngine
                 });
         }
 
+        private IEnumerable<Square> CenterWhiteSquares
+        {
+            get
+            {
+                yield return this[dimension.CenterPosition];
+                yield return this[dimension.CenterPosition.NextPosition(Direction.SouthEast)!];                
+            }
+        }
+
+        private IEnumerable<Square> CenterBlackSquares
+        {
+            get
+            {
+                yield return this[dimension.CenterPosition.NextPosition(Direction.South)!];
+                yield return this[dimension.CenterPosition.NextPosition(Direction.East)!];
+            }
+        }
+
         private void SetInitialState()
         {
-            PlaceDiscInSquare(Disc.WhiteSideUp, "d4");
-            PlaceDiscInSquare(Disc.BlackSideUp, "d5");
+            foreach (var centerWhiteSquare in CenterWhiteSquares)
+            {
+                centerWhiteSquare.PlaceDisc(Disc.WhiteSideUp);
+            }
 
-            PlaceDiscInSquare(Disc.BlackSideUp, "e4");
-            PlaceDiscInSquare(Disc.WhiteSideUp, "e5");
+            foreach (var centerBlackSquare in CenterBlackSquares)
+            {
+                centerBlackSquare.PlaceDisc(Disc.BlackSideUp);
+            }
         }
     }
 }

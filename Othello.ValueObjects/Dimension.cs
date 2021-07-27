@@ -2,24 +2,24 @@
 
 namespace Othello.ValueObjects
 {
-    public class Dimension
+    public record Dimension(sbyte Length)
     {
         public const sbyte MinDimension = 2;
-        public const sbyte MaxSideLength = 26;
+        public const sbyte MaxDimension = 20;
 
-        private readonly sbyte sideLength;
+        private sbyte Length { get; }
+            = MinDimension <= Length && Length <= MaxDimension
+            ? Length
+            : throw new ArgumentOutOfRangeException(nameof(Length));
 
-        public Dimension(int sideLength)
-        {
-            this.sideLength = MinDimension <= sideLength && sideLength <= MaxSideLength
-                ? (sbyte)sideLength
-                : throw new ArgumentOutOfRangeException(nameof(sideLength));
-        }
+        private sbyte HalfLength => (sbyte)(Length / 2);
+        
+        public Position CenterPosition => new(HalfLength, HalfLength);
 
         public static implicit operator int(Dimension dimension)
-            => dimension.sideLength;
+            => dimension.Length;
 
-        public static implicit operator Dimension(sbyte sideLength)
-            => new(sideLength);
+        public static implicit operator Dimension(int length)
+            => new(Convert.ToSByte(length));
     }
 }

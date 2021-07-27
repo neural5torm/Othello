@@ -15,7 +15,7 @@ namespace Othello.ValueObjects
     /// columns go from a to h (left to right) and
     /// rows go from 1 to 8 (top to bottom).
     /// 
-    /// Internally uses sbyte Column and Row properties for easy mathematical manipulation.
+    /// Internally uses sbyte Column and Row indices for easy, memory-efficient mathematical manipulation.
     /// </summary>
     public sealed record Position(sbyte Column, sbyte Row)
     {
@@ -30,14 +30,8 @@ namespace Othello.ValueObjects
             : throw new ArgumentOutOfRangeException(nameof(Row));
 
         public Position(string column, int row)
-            : this(column.ToColumnIndex(), (sbyte)row)
+            : this(column.ToColumnIndex(), Convert.ToSByte(row))
         {
-            var columnIndex = column.ToColumnIndex();
-            if (columnIndex < sbyte.MinValue || sbyte.MaxValue < columnIndex )
-                throw new ArgumentOutOfRangeException(nameof(column));
-
-            if (row < sbyte.MinValue || sbyte.MaxValue < row)
-                throw new ArgumentOutOfRangeException(nameof(row));
         }
 
         public bool IsValidForDimension(Dimension dimension)
@@ -57,15 +51,16 @@ namespace Othello.ValueObjects
                 return null;
 
             var change = direction.ToPositionChange();
-            return new((sbyte)(Column + change.ColumnDelta), 
-                (sbyte)(Row + change.RowDelta));
-        }
 
-        public override string ToString()
-            => this;
+            return new(Convert.ToSByte(Column + change.ColumnDelta), 
+                Convert.ToSByte(Row + change.RowDelta));
+        }
 
         public static implicit operator string(Position position)
             => $"{position.Column.ToColumnName()}{position.Row}";
+        
+        public override string ToString()
+           => this;
 
         public static implicit operator Position(string position)
         {
@@ -79,11 +74,11 @@ namespace Othello.ValueObjects
 
         public static IEnumerable<Position> AllPositionsForBoardDimension(Dimension boardDimension)
         {
-            foreach (var columnIndex in Enumerable.Range(1, boardDimension))
+            foreach (var columnIndex in Enumerable.Range(Index.MinIndex, boardDimension))
             {
-                foreach (var rowIndex in Enumerable.Range(1, boardDimension))
+                foreach (var rowIndex in Enumerable.Range(Index.MinIndex, boardDimension))
                 {
-                    yield return new((sbyte)columnIndex, (sbyte)rowIndex);
+                    yield return new(Convert.ToSByte(columnIndex), Convert.ToSByte(rowIndex));
                 }
             }
         }

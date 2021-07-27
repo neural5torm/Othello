@@ -10,26 +10,28 @@ namespace Othello.UnitTests
         [Theory]
         [InlineData(8)]
         [InlineData(2)]
-        [InlineData(26)]
-        public void CreateValidDimension(sbyte sideLength)
+        [InlineData(20)]
+        public void CreateValidDimension(int length)
         {
             // Act
-            int dimension = new Dimension(sideLength);
+            Dimension dimension = length;
 
             // Assert
-            dimension
-                .Should().Be(sideLength);
+            ((int)dimension)
+                .Should()
+                .Be(length);
         }
 
         [Theory]
-        [InlineData(-1)]
+        [InlineData(-255)]
         [InlineData(0)]
         [InlineData(1)]
-        [InlineData(27)]
-        public void CreateInvalidDimension(sbyte length)
+        [InlineData(21)]
+        [InlineData(257)]
+        public void CreateInvalidDimension(int length)
         {
             // Act
-            Action create = () => _ = new Dimension(length);
+            Action create = () => _ = (Dimension)length;
 
             // Assert
             create

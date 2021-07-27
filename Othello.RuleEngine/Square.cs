@@ -37,6 +37,17 @@ namespace Othello.RuleEngine
         public bool IsBlackFacingUp => Disc == Disc.BlackSideUp;
         public bool IsWhiteFacingUp => Disc == Disc.WhiteSideUp;
 
+        public override string ToString()
+        {
+            return Disc switch
+            {
+                Disc.None => " ",
+                Disc.BlackSideUp => "B",
+                Disc.WhiteSideUp => "W",
+                _ => "?"
+            };
+        }
+
         internal bool HasDisc(Disc disc)
             => Disc == disc;
     }

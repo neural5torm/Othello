@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace Othello.ValueObjects
 {
@@ -11,9 +12,13 @@ namespace Othello.ValueObjects
         public const sbyte MaxIndex = MaxColumnName - MinColumnName + MinIndex;
 
         public static sbyte ToColumnIndex(this string columnName)
-            => (sbyte)(columnName.Trim().ToLower().Single() - MinColumnName + MinIndex);
+            => Convert.ToSByte(columnName
+                .Trim()
+                .ToLower()
+                .Single() - MinColumnName + MinIndex);
 
         public static string ToColumnName(this sbyte columnIndex)
-            => ((char)(MinColumnName + columnIndex - MinIndex)).ToString();
+            => Convert.ToChar(MinColumnName + columnIndex - MinIndex)
+                .ToString();
     }
 }
