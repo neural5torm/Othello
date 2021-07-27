@@ -42,11 +42,14 @@ namespace Othello.ValueObjects
 
         public Position? NextPosition(Direction direction)
         {
-            if (this == Origin &&
+            if (Column == Index.MinIndex &&
+                (direction == Direction.NorthWest ||
+                direction == Direction.West ||
+                direction == Direction.SouthWest)
+                ||
+                Row == Index.MinIndex &&
                 (direction == Direction.North ||
                 direction == Direction.NorthEast ||
-                direction == Direction.SouthWest ||
-                direction == Direction.West ||
                 direction == Direction.NorthWest))
                 return null;
 

@@ -22,32 +22,46 @@ namespace Othello.SpecTests.Steps
         }
 
 
-        [Given(@"an initial board is created")]
-        public void GivenAnInitialBoardIsCreated()
+        [Given(@"an initial Othello board is created")]
+        public void GivenAnInitialOthelloBoardIsCreated()
         {
-            CreateInitialOthelloBoard();
+            CreateInitialBoard();
+        }
+
+        [Given(@"an initial (.+x.+) board is created")]
+        public void GivenAnInitialBoardIsCreated(string dimensions)
+        {
+            int dimension = int.Parse(dimensions.Split("x").First());
+            CreateInitialBoard(dimension);
         }
 
 
         [When(@"I create an initial Othello board")]
         public void WhenICreateAnInitialOthelloBoard()
         {
-            CreateInitialOthelloBoard();
+            CreateInitialBoard();
         }
 
-        [When(@"I create an initial (.+x.+) Othello board")]
-        public void WhenICreateAnInitialOthelloBoard(string dimensions)
+        [When(@"I create an initial (.+x.+) board")]
+        public void WhenICreateAnInitialBoard(string dimensions)
         {
             int dimension = int.Parse(dimensions.Split("x").First());
-            CreateInitialOthelloBoard(dimension);
+            CreateInitialBoard(dimension);
         }
 
 
-        [When(@"Black places a disc in square (.{2})")]
-        public void WhenBlackPlacesADiscInSquare(string position)
+        [When(@"(Black|White) places a disc in square (.{2})")]
+        public void WhenBlackPlacesADiscInSquare(string player, string position)
         {
             var board = GetBoard();
-            board.PlayMove(Disc.BlackSideUp, position);
+            var disc = player switch
+            {
+                "Black" => Disc.BlackSideUp,
+                "White" => Disc.WhiteSideUp,
+                _ => Disc.None
+            };
+
+            board.PlayMove(disc, position);
         }
 
         [When(@"Black tries to place a disc in square (.{2})")]
@@ -99,7 +113,7 @@ namespace Othello.SpecTests.Steps
         }
 
 
-        private void CreateInitialOthelloBoard(int dimension = 8)
+        private void CreateInitialBoard(int dimension = 8)
         {
             var board = new Board(dimension);
             scenarioContext.Add(BoardKey, board);

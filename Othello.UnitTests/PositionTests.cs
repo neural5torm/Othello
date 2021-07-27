@@ -112,18 +112,19 @@ namespace Othello.UnitTests
         }
 
         [Theory]
-        [InlineData(Direction.North)]
-        [InlineData(Direction.NorthEast)]
-        [InlineData(Direction.SouthWest)]
-        [InlineData(Direction.West)]
-        [InlineData(Direction.NorthWest)]
-        public void GetNextPositionWithInvalidDirection(Direction direction)
+        [InlineData(Direction.North, "h1")]
+        [InlineData(Direction.NorthEast, "h1")]
+        [InlineData(Direction.NorthWest, "h1")]
+        [InlineData(Direction.NorthWest, "a8")]
+        [InlineData(Direction.West, "a8")]
+        [InlineData(Direction.SouthWest, "a8")]
+        public void GetNextPositionWithInvalidDirection(Direction direction, string from)
         {
             // Arrange
-            Position origin = "a1";
+            Position fromPosition = from;
             
             // Act
-            var nextPosition = origin.NextPosition(direction);
+            var nextPosition = fromPosition.NextPosition(direction);
 
             // Assert
             nextPosition.Should()

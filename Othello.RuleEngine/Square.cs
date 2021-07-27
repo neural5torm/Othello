@@ -13,7 +13,7 @@ namespace Othello.RuleEngine
             Position = position;
         }
 
-        public void PlaceDisc(Disc disc)
+        public void PlaceADisc(Disc disc)
         {
             if (disc == Disc.None)
                 throw new InvalidOperationException("You cannot remove a disc from a square.");
@@ -39,16 +39,16 @@ namespace Othello.RuleEngine
 
         public override string ToString()
         {
-            return Disc switch
+            return this switch
             {
-                Disc.None => " ",
-                Disc.BlackSideUp => "B",
-                Disc.WhiteSideUp => "W",
+                var s when s.IsEmpty => " ",
+                var s when s.IsBlackFacingUp => "B",
+                var s when s.IsWhiteFacingUp => "W",
                 _ => "?"
             };
         }
 
-        internal bool HasDisc(Disc disc)
+        internal bool HasADisc(Disc disc)
             => Disc == disc;
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Othello.ValueObjects;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 
 namespace Othello.RuleEngine
@@ -39,7 +38,7 @@ namespace Othello.RuleEngine
         private Square PlaceDisc(Disc disc, Position squarePosition)
         {
             var square = this[squarePosition];
-            square.PlaceDisc(disc);
+            square.PlaceADisc(disc);
             return square;
         }
 
@@ -65,27 +64,32 @@ namespace Othello.RuleEngine
             return squaresOfSandwichedDiscs;
         }
 
-        private IReadOnlyCollection<Square> SearchSquaresOfSandwichedDiscs(Square newDiscSquare, Direction direction)
+        private IEnumerable<Square> SearchSquaresOfSandwichedDiscs(Square newDiscSquare, Direction direction)
         {
-            var opponentDisc = newDiscSquare.Disc.Flipped();
-            var squaresOfSandwichedDiscs = new List<Square>();
+            var playerDisc = newDiscSquare.Disc;
+            var opponentDisc = playerDisc.Flipped();
 
+            var squaresOfSandwichedDiscs = new List<Square>();
             for (var position = newDiscSquare.Position.NextPosition(direction); 
                 position is not null && IsPositionValidOnBoard(position); 
                 position = position.NextPosition(direction))
             {
                 var evaluatedSquare = this[position];
-                if (evaluatedSquare.HasDisc(opponentDisc))
+                if (evaluatedSquare.HasADisc(opponentDisc))
                 {
                     squaresOfSandwichedDiscs.Add(evaluatedSquare);
                 }
-                else
+                else if (evaluatedSquare.HasADisc(playerDisc))
                 {
-                    return squaresOfSandwichedDiscs.ToImmutableArray();
+                    return squaresOfSandwichedDiscs;
+                }
+                else if (evaluatedSquare.IsEmpty)
+                {
+                    return Enumerable.Empty<Square>();
                 }
             }
 
-            return new ImmutableArray<Square>();
+            return Enumerable.Empty<Square>();
         }
 
         private bool IsPositionValidOnBoard(Position? position)
@@ -124,12 +128,12 @@ namespace Othello.RuleEngine
         {
             foreach (var centerWhiteSquare in CenterWhiteSquares)
             {
-                centerWhiteSquare.PlaceDisc(Disc.WhiteSideUp);
+                centerWhiteSquare.PlaceADisc(Disc.WhiteSideUp);
             }
 
             foreach (var centerBlackSquare in CenterBlackSquares)
             {
-                centerBlackSquare.PlaceDisc(Disc.BlackSideUp);
+                centerBlackSquare.PlaceADisc(Disc.BlackSideUp);
             }
         }
     }
