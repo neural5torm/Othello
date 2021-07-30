@@ -51,27 +51,24 @@ namespace Othello.SpecTests.Steps
 
 
         [When(@"(Black|White) places a disc in square (.{2})")]
-        public void WhenBlackPlacesADiscInSquare(string player, string position)
+        public void WhenPlayerPlacesADiscInSquare(string player, string position)
         {
             var board = GetBoard();
-            var disc = player switch
-            {
-                "Black" => Disc.BlackSideUp,
-                "White" => Disc.WhiteSideUp,
-                _ => Disc.None
-            };
+            Disc disc = DiscOfPlayer(player);
 
             board.PlayMove(disc, position);
         }
 
-        [When(@"Black tries to place a disc in square (.{2})")]
-        public void WhenBlackTriesToPlaceADiscInSquare(string position)
+
+        [When(@"(.+) tries to place a disc in square (.+)")]
+        public void WhenPlayerTriesToPlaceADiscInSquare(string player, string position)
         {
             var board = GetBoard();
+            var disc = DiscOfPlayer(player);
 
             try
             {
-                board.PlayMove(Disc.BlackSideUp, position);
+                board.PlayMove(disc, position);
             }
             catch (Exception e)
             {
@@ -112,6 +109,16 @@ namespace Othello.SpecTests.Steps
                 .Be(errorMessage);
         }
 
+
+        private static Disc DiscOfPlayer(string player)
+        {
+            return player switch
+            {
+                "Black" => Disc.BlackSideUp,
+                "White" => Disc.WhiteSideUp,
+                _ => Disc.None
+            };
+        }
 
         private void CreateInitialBoard(int dimension = 8)
         {
