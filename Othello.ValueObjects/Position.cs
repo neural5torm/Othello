@@ -15,17 +15,17 @@ namespace Othello.ValueObjects
     /// columns go from a to h (left to right) and
     /// rows go from 1 to 8 (top to bottom).
     /// 
-    /// Internally uses sbyte Column and Row indices for easy, memory-efficient mathematical manipulation.
+    /// Internally uses sbyte Column and Row indexes for easy and efficient mathematical manipulation.
     /// </summary>
-    public sealed record Position(sbyte Column, sbyte Row)
+    public record Position(sbyte Column, sbyte Row)
     {
         sbyte Column { get; } 
-            = Index.MinIndex <= Column && Column <= Index.MaxIndex
+            = IndexExtensions.MinIndex <= Column && Column <= IndexExtensions.MaxIndex
             ? Column
             : throw new ArgumentOutOfRangeException(nameof(Column));
 
         sbyte Row { get; } 
-            = Index.MinIndex <= Row && Row <= Index.MaxIndex
+            = IndexExtensions.MinIndex <= Row && Row <= IndexExtensions.MaxIndex
             ? Row
             : throw new ArgumentOutOfRangeException(nameof(Row));
 
@@ -36,18 +36,18 @@ namespace Othello.ValueObjects
 
         public bool IsValidForDimension(Dimension dimension)
         {
-            return Column < Index.MinIndex + dimension &&
-                Row < Index.MinIndex + dimension;
+            return Column < IndexExtensions.MinIndex + dimension &&
+                Row < IndexExtensions.MinIndex + dimension;
         }
 
         public Position? NextPosition(Direction direction)
         {
-            if (Column == Index.MinIndex &&
+            if (Column == IndexExtensions.MinIndex &&
                 (direction == Direction.NorthWest ||
                 direction == Direction.West ||
                 direction == Direction.SouthWest)
                 ||
-                Row == Index.MinIndex &&
+                Row == IndexExtensions.MinIndex &&
                 (direction == Direction.North ||
                 direction == Direction.NorthEast ||
                 direction == Direction.NorthWest))
@@ -77,15 +77,15 @@ namespace Othello.ValueObjects
 
         public static IEnumerable<Position> AllPositionsForBoardDimension(Dimension boardDimension)
         {
-            foreach (var columnIndex in Enumerable.Range(Index.MinIndex, boardDimension))
+            foreach (var columnIndex in Enumerable.Range(IndexExtensions.MinIndex, boardDimension))
             {
-                foreach (var rowIndex in Enumerable.Range(Index.MinIndex, boardDimension))
+                foreach (var rowIndex in Enumerable.Range(IndexExtensions.MinIndex, boardDimension))
                 {
                     yield return new(Convert.ToSByte(columnIndex), Convert.ToSByte(rowIndex));
                 }
             }
         }
 
-        public static Position Origin => new(Index.MinIndex, Index.MinIndex);
+        public static Position Origin => new(IndexExtensions.MinIndex, IndexExtensions.MinIndex);
     }
 }

@@ -136,6 +136,9 @@ namespace Othello.SpecTests.Steps
         }
         private Exception GetError()
         {
+            if (!scenarioContext.ContainsKey(ErrorKey))
+                throw new SpecFlowException("No error was raised.");
+
             return scenarioContext.Get<Exception>(ErrorKey);
         }
         private void CheckNoError()

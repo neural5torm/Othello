@@ -48,7 +48,7 @@ namespace Othello.RuleEngine
             };
         }
 
-        internal bool HasADisc(Disc disc)
+        internal bool HasDisc(Disc disc)
             => Disc == disc;
     }
 }

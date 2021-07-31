@@ -80,17 +80,17 @@ namespace Othello.SpecTests
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Creating an initial Othello board should display an 8x8 grid of squares with its " +
-            "2x2 center containing the initial black and white discs")]
+        [Xunit.SkippableFactAttribute(DisplayName="Creating a 10x10 initial Othello board should display a 10x10 grid of empty squar" +
+            "es except for its 2x2 center containing the initial black and white discs")]
         [Xunit.TraitAttribute("FeatureTitle", "Create Othello board")]
-        [Xunit.TraitAttribute("Description", "Creating an initial Othello board should display an 8x8 grid of squares with its " +
-            "2x2 center containing the initial black and white discs")]
-        public virtual void CreatingAnInitialOthelloBoardShouldDisplayAn8X8GridOfSquaresWithIts2X2CenterContainingTheInitialBlackAndWhiteDiscs()
+        [Xunit.TraitAttribute("Description", "Creating a 10x10 initial Othello board should display a 10x10 grid of empty squar" +
+            "es except for its 2x2 center containing the initial black and white discs")]
+        public virtual void CreatingA10X10InitialOthelloBoardShouldDisplayA10X10GridOfEmptySquaresExceptForIts2X2CenterContainingTheInitialBlackAndWhiteDiscs()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Creating an initial Othello board should display an 8x8 grid of squares with its " +
-                    "2x2 center containing the initial black and white discs", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Creating a 10x10 initial Othello board should display a 10x10 grid of empty squar" +
+                    "es except for its 2x2 center containing the initial black and white discs", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 3
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -112,7 +112,7 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 4
- testRunner.When("I create an initial Othello board", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I create an initial 10x10 Othello board", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                             "",
@@ -123,9 +123,13 @@ this.ScenarioInitialize(scenarioInfo);
                             "e",
                             "f",
                             "g",
-                            "h"});
+                            "h",
+                            "i",
+                            "j"});
                 table1.AddRow(new string[] {
                             "1",
+                            "",
+                            "",
                             "",
                             "",
                             "",
@@ -143,9 +147,13 @@ this.ScenarioInitialize(scenarioInfo);
                             "",
                             "",
                             "",
+                            "",
+                            "",
                             ""});
                 table1.AddRow(new string[] {
                             "3",
+                            "",
+                            "",
                             "",
                             "",
                             "",
@@ -159,8 +167,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "",
                             "",
                             "",
-                            "W",
-                            "B",
+                            "",
+                            "",
+                            "",
+                            "",
                             "",
                             "",
                             ""});
@@ -169,8 +179,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "",
                             "",
                             "",
-                            "B",
+                            "",
                             "W",
+                            "B",
+                            "",
                             "",
                             "",
                             ""});
@@ -180,12 +192,16 @@ this.ScenarioInitialize(scenarioInfo);
                             "",
                             "",
                             "",
+                            "B",
+                            "W",
                             "",
                             "",
                             "",
                             ""});
                 table1.AddRow(new string[] {
                             "7",
+                            "",
+                            "",
                             "",
                             "",
                             "",
@@ -203,9 +219,354 @@ this.ScenarioInitialize(scenarioInfo);
                             "",
                             "",
                             "",
+                            "",
+                            "",
+                            ""});
+                table1.AddRow(new string[] {
+                            "9",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            ""});
+                table1.AddRow(new string[] {
+                            "10",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
                             ""});
 #line 5
  testRunner.Then("the board should look like", ((string)(null)), table1, "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Creating a standard initial Othello board should display an 8x8 grid of empty squ" +
+            "ares except for its 2x2 center containing the initial black and white discs")]
+        [Xunit.TraitAttribute("FeatureTitle", "Create Othello board")]
+        [Xunit.TraitAttribute("Description", "Creating a standard initial Othello board should display an 8x8 grid of empty squ" +
+            "ares except for its 2x2 center containing the initial black and white discs")]
+        public virtual void CreatingAStandardInitialOthelloBoardShouldDisplayAn8X8GridOfEmptySquaresExceptForIts2X2CenterContainingTheInitialBlackAndWhiteDiscs()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Creating a standard initial Othello board should display an 8x8 grid of empty squ" +
+                    "ares except for its 2x2 center containing the initial black and white discs", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 18
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 19
+ testRunner.When("I create an initial Othello board", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                            "",
+                            "a",
+                            "b",
+                            "c",
+                            "d",
+                            "e",
+                            "f",
+                            "g",
+                            "h"});
+                table2.AddRow(new string[] {
+                            "1",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            ""});
+                table2.AddRow(new string[] {
+                            "2",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            ""});
+                table2.AddRow(new string[] {
+                            "3",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            ""});
+                table2.AddRow(new string[] {
+                            "4",
+                            "",
+                            "",
+                            "",
+                            "W",
+                            "B",
+                            "",
+                            "",
+                            ""});
+                table2.AddRow(new string[] {
+                            "5",
+                            "",
+                            "",
+                            "",
+                            "B",
+                            "W",
+                            "",
+                            "",
+                            ""});
+                table2.AddRow(new string[] {
+                            "6",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            ""});
+                table2.AddRow(new string[] {
+                            "7",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            ""});
+                table2.AddRow(new string[] {
+                            "8",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            ""});
+#line 20
+ testRunner.Then("the board should look like", ((string)(null)), table2, "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Creating an initial 4x4 Othello board should display a 4x4 grid of empty squares " +
+            "except for its 2x2 center containing the initial black and white discs")]
+        [Xunit.TraitAttribute("FeatureTitle", "Create Othello board")]
+        [Xunit.TraitAttribute("Description", "Creating an initial 4x4 Othello board should display a 4x4 grid of empty squares " +
+            "except for its 2x2 center containing the initial black and white discs")]
+        public virtual void CreatingAnInitial4X4OthelloBoardShouldDisplayA4X4GridOfEmptySquaresExceptForIts2X2CenterContainingTheInitialBlackAndWhiteDiscs()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Creating an initial 4x4 Othello board should display a 4x4 grid of empty squares " +
+                    "except for its 2x2 center containing the initial black and white discs", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 31
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 32
+ testRunner.When("I create an initial 4x4 Othello board", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                            "",
+                            "a",
+                            "b",
+                            "c",
+                            "d"});
+                table3.AddRow(new string[] {
+                            "1",
+                            "",
+                            "",
+                            "",
+                            ""});
+                table3.AddRow(new string[] {
+                            "2",
+                            "",
+                            "W",
+                            "B",
+                            ""});
+                table3.AddRow(new string[] {
+                            "3",
+                            "",
+                            "B",
+                            "W",
+                            ""});
+                table3.AddRow(new string[] {
+                            "4",
+                            "",
+                            "",
+                            "",
+                            ""});
+#line 33
+ testRunner.Then("the board should look like", ((string)(null)), table3, "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Creating an initial 3x3 Othello board should display a 3x3 grid of empty squares " +
+            "except for its 2x2 top-left squares containing the initial black and white discs" +
+            "")]
+        [Xunit.TraitAttribute("FeatureTitle", "Create Othello board")]
+        [Xunit.TraitAttribute("Description", "Creating an initial 3x3 Othello board should display a 3x3 grid of empty squares " +
+            "except for its 2x2 top-left squares containing the initial black and white discs" +
+            "")]
+        public virtual void CreatingAnInitial3X3OthelloBoardShouldDisplayA3X3GridOfEmptySquaresExceptForIts2X2Top_LeftSquaresContainingTheInitialBlackAndWhiteDiscs()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Creating an initial 3x3 Othello board should display a 3x3 grid of empty squares " +
+                    "except for its 2x2 top-left squares containing the initial black and white discs" +
+                    "", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 40
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 41
+ testRunner.When("I create an initial 3x3 Othello board", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                            "",
+                            "a",
+                            "b",
+                            "c"});
+                table4.AddRow(new string[] {
+                            "1",
+                            "W",
+                            "B",
+                            ""});
+                table4.AddRow(new string[] {
+                            "2",
+                            "B",
+                            "W",
+                            ""});
+                table4.AddRow(new string[] {
+                            "3",
+                            "",
+                            "",
+                            ""});
+#line 42
+ testRunner.Then("the board should look like", ((string)(null)), table4, "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Creating an initial 2x2 Othello board should display a 2x2 grid containing the in" +
+            "itial black and white discs")]
+        [Xunit.TraitAttribute("FeatureTitle", "Create Othello board")]
+        [Xunit.TraitAttribute("Description", "Creating an initial 2x2 Othello board should display a 2x2 grid containing the in" +
+            "itial black and white discs")]
+        public virtual void CreatingAnInitial2X2OthelloBoardShouldDisplayA2X2GridContainingTheInitialBlackAndWhiteDiscs()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Creating an initial 2x2 Othello board should display a 2x2 grid containing the in" +
+                    "itial black and white discs", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 48
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 49
+ testRunner.When("I create an initial 2x2 Othello board", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                            "",
+                            "a",
+                            "b"});
+                table5.AddRow(new string[] {
+                            "1",
+                            "W",
+                            "B"});
+                table5.AddRow(new string[] {
+                            "2",
+                            "B",
+                            "W"});
+#line 50
+ testRunner.Then("the board should look like", ((string)(null)), table5, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

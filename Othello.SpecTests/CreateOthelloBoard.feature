@@ -1,20 +1,5 @@
 ﻿Feature: Create Othello board
 	
-Scenario: Creating a 10x10 initial Othello board should display a 10x10 grid of empty squares except for its 2x2 center containing the initial black and white discs
-	When I create an initial 10x10 Othello board
-	Then the board should look like
-	|    | a | b | c | d | e | f | g | h | i | j |
-	| 1  |   |   |   |   |   |   |   |   |   |   |
-	| 2  |   |   |   |   |   |   |   |   |   |   |
-	| 3  |   |   |   |   |   |   |   |   |   |   |
-	| 4  |   |   |   |   |   |   |   |   |   |   |
-	| 5  |   |   |   |   | W | B |   |   |   |   |
-	| 6  |   |   |   |   | B | W |   |   |   |   |
-	| 7  |   |   |   |   |   |   |   |   |   |   |
-	| 8  |   |   |   |   |   |   |   |   |   |   |
-	| 9  |   |   |   |   |   |   |   |   |   |   |
-	| 10 |   |   |   |   |   |   |   |   |   |   |
-
 Scenario: Creating a standard initial Othello board should display an 8x8 grid of empty squares except for its 2x2 center containing the initial black and white discs
 	When I create an initial Othello board
 	Then the board should look like
@@ -52,3 +37,17 @@ Scenario: Creating an initial 2x2 Othello board should display a 2x2 grid contai
 	| 1 | W | B | 
 	| 2 | B | W | 
 	
+Scenario: Creating a 10x10 initial Othello board should display a 10x10 grid of empty squares except for its 2x2 center containing the initial black and white discs
+	When I create an initial 10x10 Othello board
+	Then the board should look like
+	|    | a | b | c | d | e | f | g | h | i | j |
+	| 1  |   |   |   |   |   |   |   |   |   |   |
+	| 2  |   |   |   |   |   |   |   |   |   |   |
+	| 3  |   |   |   |   |   |   |   |   |   |   |
+	| 4  |   |   |   |   |   |   |   |   |   |   |
+	| 5  |   |   |   |   | W | B |   |   |   |   |
+	| 6  |   |   |   |   | B | W |   |   |   |   |
+	| 7  |   |   |   |   |   |   |   |   |   |   |
+	| 8  |   |   |   |   |   |   |   |   |   |   |
+	| 9  |   |   |   |   |   |   |   |   |   |   |
+	| 10 |   |   |   |   |   |   |   |   |   |   |
