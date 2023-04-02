@@ -22,14 +22,6 @@ Scenario: Creating an initial 4x4 Othello board should display a 4x4 grid of emp
 	| 3 |   | B | W |   |
 	| 4 |   |   |   |   |
 
-Scenario: Creating an initial 3x3 Othello board should display a 3x3 grid of empty squares except for its 2x2 top-left squares containing the initial black and white discs
-	When I create an initial 3x3 Othello board
-	Then the board should look like
-	|   | a | b | c |
-	| 1 | W | B |   |
-	| 2 | B | W |   |
-	| 3 |   |   |   |
-
 Scenario: Creating an initial 2x2 Othello board should display a 2x2 grid containing the initial black and white discs
 	When I create an initial 2x2 Othello board
 	Then the board should look like

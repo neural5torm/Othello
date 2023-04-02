@@ -78,11 +78,11 @@ namespace Othello.UnitTests
 
         [Theory]
         [InlineData(2, new string[] { "a1", "a2", "b1", "b2" })]
-        [InlineData(3, new string[] { "a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3" })]
+        [InlineData(4, new string[] { "a1", "a2", "a3", "a4", "b1", "b2", "b3", "b4", "c1", "c2", "c3", "c4", "d1", "d2", "d3", "d4" })]
         public void EnumerateAllPositionsForBoardDimension(sbyte dimension, string[] expectedPositions)
         {
             // Act
-            var positions = Position.AllPositionsForBoardDimension(dimension);
+            var positions = Position.AllPositionsForBoardDimension((Dimension)dimension);
 
             // Assert
             positions.Should()

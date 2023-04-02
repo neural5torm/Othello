@@ -42,10 +42,10 @@ namespace Othello.SpecTests.Steps
             CreateInitialBoard();
         }
 
-        [When(@"I create an initial (.+x.+) board")]
-        public void WhenICreateAnInitialBoard(string dimensions)
+        [When(@"I create an initial (.+)x(?:.+) board")]
+        public void WhenICreateAnInitialBoard(string dimensionToParse)
         {
-            int dimension = int.Parse(dimensions.Split("x").First());
+            int dimension = int.Parse(dimensionToParse);
             CreateInitialBoard(dimension);
         }
 
@@ -122,7 +122,7 @@ namespace Othello.SpecTests.Steps
 
         private void CreateInitialBoard(int dimension = 8)
         {
-            var board = new Board(dimension);
+            var board = new Board((Dimension)dimension);
             scenarioContext.Add(BoardKey, board);
         }
         private Board GetBoard()

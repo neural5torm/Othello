@@ -36,8 +36,8 @@ namespace Othello.ValueObjects
 
         public bool IsValidForDimension(Dimension dimension)
         {
-            return Column < IndexExtensions.MinIndex + dimension &&
-                Row < IndexExtensions.MinIndex + dimension;
+            return Column < IndexExtensions.MinIndex + dimension.Length &&
+                Row < IndexExtensions.MinIndex + dimension.Length;
         }
 
         public Position? NextPosition(Direction direction)
@@ -77,9 +77,9 @@ namespace Othello.ValueObjects
 
         public static IEnumerable<Position> AllPositionsForBoardDimension(Dimension boardDimension)
         {
-            foreach (var columnIndex in Enumerable.Range(IndexExtensions.MinIndex, boardDimension))
+            foreach (var columnIndex in boardDimension.Indices)
             {
-                foreach (var rowIndex in Enumerable.Range(IndexExtensions.MinIndex, boardDimension))
+                foreach (var rowIndex in boardDimension.Indices)
                 {
                     yield return new(Convert.ToSByte(columnIndex), Convert.ToSByte(rowIndex));
                 }

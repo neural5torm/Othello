@@ -126,38 +126,38 @@ this.FeatureBackground();
 #line 7
  testRunner.When("Black places a disc in square a2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                             "",
                             "a",
                             "b",
                             "c",
                             "d"});
-                table6.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "1",
                             "",
                             "",
                             "",
                             ""});
-                table6.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "2",
                             "B",
                             "B",
                             "B",
                             ""});
-                table6.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "3",
                             "",
                             "B",
                             "W",
                             ""});
-                table6.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "4",
                             "",
                             "",
                             "",
                             ""});
 #line 8
- testRunner.Then("the board should look like", ((string)(null)), table6, "Then ");
+ testRunner.Then("the board should look like", ((string)(null)), table5, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -200,38 +200,38 @@ this.FeatureBackground();
 #line 17
  testRunner.And("White places a disc in square c1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                             "",
                             "a",
                             "b",
                             "c",
                             "d"});
-                table7.AddRow(new string[] {
+                table6.AddRow(new string[] {
                             "1",
                             "",
                             "",
                             "W",
                             ""});
-                table7.AddRow(new string[] {
+                table6.AddRow(new string[] {
                             "2",
                             "B",
                             "B",
                             "W",
                             ""});
-                table7.AddRow(new string[] {
+                table6.AddRow(new string[] {
                             "3",
                             "",
                             "B",
                             "W",
                             ""});
-                table7.AddRow(new string[] {
+                table6.AddRow(new string[] {
                             "4",
                             "",
                             "",
                             "",
                             ""});
 #line 18
- testRunner.Then("the board should look like", ((string)(null)), table7, "Then ");
+ testRunner.Then("the board should look like", ((string)(null)), table6, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -277,38 +277,38 @@ this.FeatureBackground();
 #line 28
  testRunner.And("Black places a disc in square d2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                             "",
                             "a",
                             "b",
                             "c",
                             "d"});
-                table8.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             "1",
                             "",
                             "",
                             "W",
                             ""});
-                table8.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             "2",
                             "B",
                             "B",
                             "B",
                             "B"});
-                table8.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             "3",
                             "",
                             "B",
                             "W",
                             ""});
-                table8.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             "4",
                             "",
                             "",
                             "",
                             ""});
 #line 29
- testRunner.Then("the board should look like", ((string)(null)), table8, "Then ");
+ testRunner.Then("the board should look like", ((string)(null)), table7, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -357,38 +357,38 @@ this.FeatureBackground();
 #line 40
  testRunner.And("White places a disc in square a3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                             "",
                             "a",
                             "b",
                             "c",
                             "d"});
-                table9.AddRow(new string[] {
+                table8.AddRow(new string[] {
                             "1",
                             "",
                             "",
                             "W",
                             ""});
-                table9.AddRow(new string[] {
+                table8.AddRow(new string[] {
                             "2",
                             "B",
                             "W",
                             "B",
                             "B"});
-                table9.AddRow(new string[] {
+                table8.AddRow(new string[] {
                             "3",
                             "W",
                             "W",
                             "W",
                             ""});
-                table9.AddRow(new string[] {
+                table8.AddRow(new string[] {
                             "4",
                             "",
                             "",
                             "",
                             ""});
 #line 41
- testRunner.Then("the board should look like", ((string)(null)), table9, "Then ");
+ testRunner.Then("the board should look like", ((string)(null)), table8, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -440,38 +440,38 @@ this.FeatureBackground();
 #line 53
  testRunner.And("Black places a disc in square a4", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                             "",
                             "a",
                             "b",
                             "c",
                             "d"});
-                table10.AddRow(new string[] {
+                table9.AddRow(new string[] {
                             "1",
                             "",
                             "",
                             "W",
                             ""});
-                table10.AddRow(new string[] {
+                table9.AddRow(new string[] {
                             "2",
                             "B",
                             "W",
                             "B",
                             "B"});
-                table10.AddRow(new string[] {
+                table9.AddRow(new string[] {
                             "3",
                             "B",
                             "B",
                             "W",
                             ""});
-                table10.AddRow(new string[] {
+                table9.AddRow(new string[] {
                             "4",
                             "B",
                             "",
                             "",
                             ""});
 #line 54
- testRunner.Then("the board should look like", ((string)(null)), table10, "Then ");
+ testRunner.Then("the board should look like", ((string)(null)), table9, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -526,38 +526,38 @@ this.FeatureBackground();
 #line 67
  testRunner.And("White places a disc in square b4", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                             "",
                             "a",
                             "b",
                             "c",
                             "d"});
-                table11.AddRow(new string[] {
+                table10.AddRow(new string[] {
                             "1",
                             "",
                             "",
                             "W",
                             ""});
-                table11.AddRow(new string[] {
+                table10.AddRow(new string[] {
                             "2",
                             "B",
                             "W",
                             "B",
                             "B"});
-                table11.AddRow(new string[] {
+                table10.AddRow(new string[] {
                             "3",
                             "B",
                             "W",
                             "W",
                             ""});
-                table11.AddRow(new string[] {
+                table10.AddRow(new string[] {
                             "4",
                             "B",
                             "W",
                             "",
                             ""});
 #line 68
- testRunner.Then("the board should look like", ((string)(null)), table11, "Then ");
+ testRunner.Then("the board should look like", ((string)(null)), table10, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -615,38 +615,38 @@ this.FeatureBackground();
 #line 82
  testRunner.And("Black places a disc in square c4", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                             "",
                             "a",
                             "b",
                             "c",
                             "d"});
-                table12.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "1",
                             "",
                             "",
                             "W",
                             ""});
-                table12.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "2",
                             "B",
                             "W",
                             "B",
                             "B"});
-                table12.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "3",
                             "B",
                             "B",
                             "B",
                             ""});
-                table12.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "4",
                             "B",
                             "B",
                             "B",
                             ""});
 #line 83
- testRunner.Then("the board should look like", ((string)(null)), table12, "Then ");
+ testRunner.Then("the board should look like", ((string)(null)), table11, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -707,38 +707,38 @@ this.FeatureBackground();
 #line 98
  testRunner.And("White places a disc in square d4", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                             "",
                             "a",
                             "b",
                             "c",
                             "d"});
-                table13.AddRow(new string[] {
+                table12.AddRow(new string[] {
                             "1",
                             "",
                             "",
                             "W",
                             ""});
-                table13.AddRow(new string[] {
+                table12.AddRow(new string[] {
                             "2",
                             "B",
                             "W",
                             "B",
                             "B"});
-                table13.AddRow(new string[] {
+                table12.AddRow(new string[] {
                             "3",
                             "B",
                             "B",
                             "W",
                             ""});
-                table13.AddRow(new string[] {
+                table12.AddRow(new string[] {
                             "4",
                             "B",
                             "B",
                             "B",
                             "W"});
 #line 99
- testRunner.Then("the board should look like", ((string)(null)), table13, "Then ");
+ testRunner.Then("the board should look like", ((string)(null)), table12, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -802,38 +802,38 @@ this.FeatureBackground();
 #line 115
  testRunner.And("Black places a disc in square d3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                             "",
                             "a",
                             "b",
                             "c",
                             "d"});
-                table14.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "1",
                             "",
                             "",
                             "W",
                             ""});
-                table14.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "2",
                             "B",
                             "W",
                             "B",
                             "B"});
-                table14.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "3",
                             "B",
                             "B",
                             "B",
                             "B"});
-                table14.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "4",
                             "B",
                             "B",
                             "B",
                             "W"});
 #line 116
- testRunner.Then("the board should look like", ((string)(null)), table14, "Then ");
+ testRunner.Then("the board should look like", ((string)(null)), table13, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -900,38 +900,38 @@ this.FeatureBackground();
 #line 133
  testRunner.And("White places a disc in square d1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                             "",
                             "a",
                             "b",
                             "c",
                             "d"});
-                table15.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "1",
                             "",
                             "",
                             "W",
                             "W"});
-                table15.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "2",
                             "B",
                             "W",
                             "B",
                             "W"});
-                table15.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "3",
                             "B",
                             "B",
                             "B",
                             "W"});
-                table15.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "4",
                             "B",
                             "B",
                             "B",
                             "W"});
 #line 134
- testRunner.Then("the board should look like", ((string)(null)), table15, "Then ");
+ testRunner.Then("the board should look like", ((string)(null)), table14, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -1001,38 +1001,38 @@ this.FeatureBackground();
 #line 152
  testRunner.And("Black places a disc in square a1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
                             "",
                             "a",
                             "b",
                             "c",
                             "d"});
-                table16.AddRow(new string[] {
+                table15.AddRow(new string[] {
                             "1",
                             "B",
                             "",
                             "W",
                             "W"});
-                table16.AddRow(new string[] {
+                table15.AddRow(new string[] {
                             "2",
                             "B",
                             "B",
                             "B",
                             "W"});
-                table16.AddRow(new string[] {
+                table15.AddRow(new string[] {
                             "3",
                             "B",
                             "B",
                             "B",
                             "W"});
-                table16.AddRow(new string[] {
+                table15.AddRow(new string[] {
                             "4",
                             "B",
                             "B",
                             "B",
                             "W"});
 #line 153
- testRunner.Then("the board should look like", ((string)(null)), table16, "Then ");
+ testRunner.Then("the board should look like", ((string)(null)), table15, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -1105,38 +1105,38 @@ this.FeatureBackground();
 #line 172
  testRunner.And("White places a disc in square b1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                             "",
                             "a",
                             "b",
                             "c",
                             "d"});
-                table17.AddRow(new string[] {
+                table16.AddRow(new string[] {
                             "1",
                             "B",
                             "W",
                             "W",
                             "W"});
-                table17.AddRow(new string[] {
+                table16.AddRow(new string[] {
                             "2",
                             "B",
                             "B",
                             "W",
                             "W"});
-                table17.AddRow(new string[] {
+                table16.AddRow(new string[] {
                             "3",
                             "B",
                             "B",
                             "B",
                             "W"});
-                table17.AddRow(new string[] {
+                table16.AddRow(new string[] {
                             "4",
                             "B",
                             "B",
                             "B",
                             "W"});
 #line 173
- testRunner.Then("the board should look like", ((string)(null)), table17, "Then ");
+ testRunner.Then("the board should look like", ((string)(null)), table16, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Othello.ValueObjects;
+using Othello.ValueObjects.Exceptions;
 using System;
 using Xunit;
 
@@ -10,25 +11,38 @@ namespace Othello.UnitTests
         [Theory]
         [InlineData(8)]
         [InlineData(2)]
-        [InlineData(20)]
-        public void CreateValidDimension(int length)
+        [InlineData(10)]
+        public void CreateValidDimension(sbyte sideLength)
         {
             // Act
-            Dimension dimension = length;
+            Dimension dimension = (Dimension)sideLength;
 
             // Assert
-            ((int)dimension)
+            dimension.Length
                 .Should()
-                .Be(length);
+                .Be(sideLength);
         }
 
         [Theory]
-        [InlineData(-255)]
+        [InlineData(-1)]
         [InlineData(0)]
         [InlineData(1)]
-        [InlineData(21)]
-        [InlineData(257)]
-        public void CreateInvalidDimension(int length)
+        [InlineData(11)]
+        public void CreateOutOfRangeDimension(sbyte length)
+        {
+            // Act
+            Action create = () => _ = new Dimension(length);
+
+            // Assert
+            create
+                .Should()
+                .Throw<ArgumentOutOfRangeException>();
+        }
+
+        [Theory]
+        [InlineData(3)]
+        [InlineData(7)]
+        public void CreateUnevenDimension(int length)
         {
             // Act
             Action create = () => _ = (Dimension)length;
@@ -36,7 +50,7 @@ namespace Othello.UnitTests
             // Assert
             create
                 .Should()
-                .Throw<Exception>();
+                .Throw<UnevenDimensionException>();
         }
     }
 }
