@@ -120,7 +120,12 @@ namespace Othello.SpecTests.Steps
             };
         }
 
-        private void CreateInitialBoard(int dimension = 8)
+        private void CreateInitialBoard()
+        {
+            var board = new Board(Dimension.Default);
+            scenarioContext.Add(BoardKey, board);
+        }
+        private void CreateInitialBoard(int dimension)
         {
             var board = new Board((Dimension)dimension);
             scenarioContext.Add(BoardKey, board);

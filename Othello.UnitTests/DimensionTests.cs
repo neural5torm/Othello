@@ -23,6 +23,18 @@ namespace Othello.UnitTests
                 .Be(sideLength);
         }
 
+        [Fact]
+        public void CreateDefaultDimension()
+        {
+            // Act
+            Dimension dimension = Dimension.Default;
+
+            // Assert
+            dimension.Length
+                .Should()
+                .Be(8);
+        }
+
         [Theory]
         [InlineData(-1)]
         [InlineData(0)]

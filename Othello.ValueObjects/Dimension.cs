@@ -7,16 +7,18 @@ namespace Othello.ValueObjects
 {
     public record Dimension
     {
-        public const sbyte MinDimensionAllowed = 2;
-        public const sbyte DefaultDimension = 8;
-        public const sbyte MaxDimensionAllowed = 10;
+        private const sbyte MinDimensionAllowed = 2;
+        private const sbyte DefaultDimension = 8;
+        private const sbyte MaxDimensionAllowed = 10;
 
         public sbyte Length { get; init; }
-        public Dimension(sbyte length = DefaultDimension) 
+        public Dimension(sbyte length) 
         {
-            if (length < MinDimensionAllowed || length > MaxDimensionAllowed) throw new ArgumentOutOfRangeException(nameof(length));
+            if (length < MinDimensionAllowed || length > MaxDimensionAllowed) 
+                throw new ArgumentOutOfRangeException(nameof(length));
 
-            if (length % 2  != 0) throw new UnevenDimensionException();
+            if (length % 2  != 0) 
+                throw new UnevenDimensionException();
 
             Length = length;
         }
@@ -29,5 +31,11 @@ namespace Othello.ValueObjects
 
         public static explicit operator Dimension(int length)
             => new(Convert.ToSByte(length));
+
+        /// <summary>
+        /// The default 8x8 Othello board dimension
+        /// </summary>
+        public static Dimension Default
+            => new (DefaultDimension);
     }
 }
