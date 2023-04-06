@@ -13,8 +13,8 @@ Scenario: First move: Black places a disc in a2 on the initial board which shoul
 	| 4 |   |   |   |   |
 
 Scenario: Second move by White on the previous 4x4 board 
-	When Black places a disc in square a2 
-	And White places a disc in square c1 
+	Given Black placed a disc in square a2 
+	When White places a disc in square c1 
 	Then the board should look like
 	|   | a | b | c | d |
 	| 1 |   |   | W |   |
@@ -23,9 +23,9 @@ Scenario: Second move by White on the previous 4x4 board
 	| 4 |   |   |   |   |
 	
 Scenario: Third move by Black on the previous 4x4 board 
-	When Black places a disc in square a2 
-	And White places a disc in square c1 
-	And Black places a disc in square d2 
+	Given Black placed a disc in square a2 
+	And White placed a disc in square c1 
+	When Black places a disc in square d2 
 	Then the board should look like
 	|   | a | b | c | d |
 	| 1 |   |   | W |   |
@@ -34,10 +34,10 @@ Scenario: Third move by Black on the previous 4x4 board
 	| 4 |   |   |   |   |
 	
 Scenario: 4th move by White on the previous 4x4 board 
-	When Black places a disc in square a2 
-	And White places a disc in square c1 
-	And Black places a disc in square d2 
-	And White places a disc in square a3
+	Given Black placed a disc in square a2 
+	And White placed a disc in square c1 
+	And Black placed a disc in square d2 
+	When White places a disc in square a3
 	Then the board should look like
 	|   | a | b | c | d |
 	| 1 |   |   | W |   |
@@ -46,11 +46,11 @@ Scenario: 4th move by White on the previous 4x4 board
 	| 4 |   |   |   |   |
 
 Scenario: 5th move by Black on the previous 4x4 board 
-	When Black places a disc in square a2 
-	And White places a disc in square c1 
-	And Black places a disc in square d2 
-	And White places a disc in square a3
-	And Black places a disc in square a4
+	Given Black placed a disc in square a2 
+	And White placed a disc in square c1 
+	And Black placed a disc in square d2 
+	And White placed a disc in square a3
+	When Black places a disc in square a4
 	Then the board should look like
 	|   | a | b | c | d |
 	| 1 |   |   | W |   |
@@ -59,12 +59,12 @@ Scenario: 5th move by Black on the previous 4x4 board
 	| 4 | B |   |   |   |
 
 Scenario: 6th move by White on the previous 4x4 board 
-	When Black places a disc in square a2 
-	And White places a disc in square c1 
-	And Black places a disc in square d2 
-	And White places a disc in square a3
-	And Black places a disc in square a4
-	And White places a disc in square b4
+	Given Black placed a disc in square a2 
+	And White placed a disc in square c1 
+	And Black placed a disc in square d2 
+	And White placed a disc in square a3
+	And Black placed a disc in square a4
+	When White places a disc in square b4
 	Then the board should look like
 	|   | a | b | c | d |
 	| 1 |   |   | W |   |
@@ -73,13 +73,13 @@ Scenario: 6th move by White on the previous 4x4 board
 	| 4 | B | W |   |   |
 
 Scenario: 7th move by Black on the previous 4x4 board 
-	When Black places a disc in square a2 
-	And White places a disc in square c1 
-	And Black places a disc in square d2 
-	And White places a disc in square a3
-	And Black places a disc in square a4
-	And White places a disc in square b4
-	And Black places a disc in square c4
+	Given Black placed a disc in square a2 
+	And White placed a disc in square c1 
+	And Black placed a disc in square d2 
+	And White placed a disc in square a3
+	And Black placed a disc in square a4
+	And White placed a disc in square b4
+	When Black places a disc in square c4
 	Then the board should look like
 	|   | a | b | c | d |
 	| 1 |   |   | W |   |
@@ -88,14 +88,14 @@ Scenario: 7th move by Black on the previous 4x4 board
 	| 4 | B | B | B |   |
 
 Scenario: 8th move by White on the previous 4x4 board 
-	When Black places a disc in square a2 
-	And White places a disc in square c1 
-	And Black places a disc in square d2 
-	And White places a disc in square a3
-	And Black places a disc in square a4
-	And White places a disc in square b4
-	And Black places a disc in square c4
-	And White places a disc in square d4
+	Given Black placed a disc in square a2 
+	And White placed a disc in square c1 
+	And Black placed a disc in square d2 
+	And White placed a disc in square a3
+	And Black placed a disc in square a4
+	And White placed a disc in square b4
+	And Black placed a disc in square c4
+	When White places a disc in square d4
 	Then the board should look like
 	|   | a | b | c | d |
 	| 1 |   |   | W |   |
@@ -104,15 +104,15 @@ Scenario: 8th move by White on the previous 4x4 board
 	| 4 | B | B | B | W |
 
 Scenario: 9th move by Black on the previous 4x4 board 
-	When Black places a disc in square a2 
-	And White places a disc in square c1 
-	And Black places a disc in square d2 
-	And White places a disc in square a3
-	And Black places a disc in square a4
-	And White places a disc in square b4
-	And Black places a disc in square c4
-	And White places a disc in square d4
-	And Black places a disc in square d3
+	Given Black placed a disc in square a2 
+	And White placed a disc in square c1 
+	And Black placed a disc in square d2 
+	And White placed a disc in square a3
+	And Black placed a disc in square a4
+	And White placed a disc in square b4
+	And Black placed a disc in square c4
+	And White placed a disc in square d4
+	When Black places a disc in square d3
 	Then the board should look like
 	|   | a | b | c | d |
 	| 1 |   |   | W |   |
@@ -121,16 +121,16 @@ Scenario: 9th move by Black on the previous 4x4 board
 	| 4 | B | B | B | W |
 
 Scenario: 10th move by White on the previous 4x4 board 
-	When Black places a disc in square a2 
-	And White places a disc in square c1 
-	And Black places a disc in square d2 
-	And White places a disc in square a3
-	And Black places a disc in square a4
-	And White places a disc in square b4
-	And Black places a disc in square c4
-	And White places a disc in square d4
-	And Black places a disc in square d3
-	And White places a disc in square d1
+	Given Black placed a disc in square a2 
+	And White placed a disc in square c1 
+	And Black placed a disc in square d2 
+	And White placed a disc in square a3
+	And Black placed a disc in square a4
+	And White placed a disc in square b4
+	And Black placed a disc in square c4
+	And White placed a disc in square d4
+	And Black placed a disc in square d3
+	When White places a disc in square d1
 	Then the board should look like
 	|   | a | b | c | d |
 	| 1 |   |   | W | W |
@@ -139,17 +139,17 @@ Scenario: 10th move by White on the previous 4x4 board
 	| 4 | B | B | B | W |
 
 Scenario: 11th move by Black on the previous 4x4 board 
-	When Black places a disc in square a2 
-	And White places a disc in square c1 
-	And Black places a disc in square d2 
-	And White places a disc in square a3
-	And Black places a disc in square a4
-	And White places a disc in square b4
-	And Black places a disc in square c4
-	And White places a disc in square d4
-	And Black places a disc in square d3
-	And White places a disc in square d1
-	And Black places a disc in square a1
+	Given Black placed a disc in square a2 
+	And White placed a disc in square c1 
+	And Black placed a disc in square d2 
+	And White placed a disc in square a3
+	And Black placed a disc in square a4
+	And White placed a disc in square b4
+	And Black placed a disc in square c4
+	And White placed a disc in square d4
+	And Black placed a disc in square d3
+	And White placed a disc in square d1
+	When Black places a disc in square a1
 	Then the board should look like
 	|   | a | b | c | d |
 	| 1 | B |   | W | W |
@@ -158,18 +158,18 @@ Scenario: 11th move by Black on the previous 4x4 board
 	| 4 | B | B | B | W |
 
 Scenario: Last (12th) move by White on the previous 4x4 board 
-	When Black places a disc in square a2 
-	And White places a disc in square c1 
-	And Black places a disc in square d2 
-	And White places a disc in square a3
-	And Black places a disc in square a4
-	And White places a disc in square b4
-	And Black places a disc in square c4
-	And White places a disc in square d4
-	And Black places a disc in square d3
-	And White places a disc in square d1
-	And Black places a disc in square a1
-	And White places a disc in square b1
+	Given Black placed a disc in square a2 
+	And White placed a disc in square c1 
+	And Black placed a disc in square d2 
+	And White placed a disc in square a3
+	And Black placed a disc in square a4
+	And White placed a disc in square b4
+	And Black placed a disc in square c4
+	And White placed a disc in square d4
+	And Black placed a disc in square d3
+	And White placed a disc in square d1
+	And Black placed a disc in square a1
+	When White places a disc in square b1
 	Then the board should look like
 	|   | a | b | c | d |
 	| 1 | B | W | W | W |

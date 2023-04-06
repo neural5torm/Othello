@@ -28,13 +28,21 @@ namespace Othello.SpecTests.Steps
             CreateInitialBoard();
         }
 
-        [Given(@"an initial (.+x.+) board is created")]
-        public void GivenAnInitialBoardIsCreated(string dimensions)
+        [Given(@"an initial (.+)x(?:.+) board is created")]
+        public void GivenAnInitialBoardIsCreated(string dimensionToParse)
         {
-            int dimension = int.Parse(dimensions.Split("x").First());
+            int dimension = int.Parse(dimensionToParse);
             CreateInitialBoard(dimension);
         }
 
+        [Given(@"(Black|White) placed a disc in square (.{2})")]
+        public void GivenPlayerPlacedADiscInSquare(string player, string position)
+        {
+            var board = GetBoard();
+            Disc disc = DiscOfPlayer(player);
+
+            board.PlayMove(disc, position);
+        }
 
         [When(@"I create an initial Othello board")]
         public void WhenICreateAnInitialOthelloBoard()
@@ -49,7 +57,6 @@ namespace Othello.SpecTests.Steps
             CreateInitialBoard(dimension);
         }
 
-
         [When(@"(Black|White) places a disc in square (.{2})")]
         public void WhenPlayerPlacesADiscInSquare(string player, string position)
         {
@@ -58,7 +65,6 @@ namespace Othello.SpecTests.Steps
 
             board.PlayMove(disc, position);
         }
-
 
         [When(@"(.+) tries to place a disc in square (.+)")]
         public void WhenPlayerTriesToPlaceADiscInSquare(string player, string position)
@@ -75,6 +81,7 @@ namespace Othello.SpecTests.Steps
                 StoreError(e);
             }
         }
+
 
         [Then(@"the board should look like")]
         public void ThenTheBoardShouldLookLike(Table table)
