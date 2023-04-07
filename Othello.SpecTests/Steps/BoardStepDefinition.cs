@@ -41,7 +41,7 @@ namespace Othello.SpecTests.Steps
             var board = GetBoard();
             Side disc = DiscOfPlayer(player);
 
-            board.PlayerPlaysAtPosition(disc, position);
+            board.PlayerMakesMoveAt(disc, position);
         }
 
         [When(@"I create an initial Othello board")]
@@ -63,7 +63,7 @@ namespace Othello.SpecTests.Steps
             var board = GetBoard();
             Side disc = DiscOfPlayer(player);
 
-            board.PlayerPlaysAtPosition(disc, position);
+            board.PlayerMakesMoveAt(disc, position);
         }
 
         [When(@"(.+) tries to place a disc in square (.+)")]
@@ -74,7 +74,7 @@ namespace Othello.SpecTests.Steps
 
             try
             {
-                board.PlayerPlaysAtPosition(disc, position);
+                board.PlayerMakesMoveAt(disc, position);
             }
             catch (Exception e)
             {

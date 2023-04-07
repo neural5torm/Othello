@@ -29,7 +29,7 @@ namespace Othello.RuleEngine
             }
         }
 
-        public void PlayerPlaysAtPosition(Side playerSide, Position position)
+        public void PlayerMakesMoveAt(Side playerSide/*TODO: use player to determine side*/, Position position)
         {
             if (CountFilledSquaresAdjacentTo(position) == 0)
                 throw new InvalidOperationException("You must place your disc directly next to another one (vertically, horizontally or diagonally).");
@@ -37,10 +37,10 @@ namespace Othello.RuleEngine
             var square = this[position];
             var playerDisc = square.PlaceADiscOnSide(playerSide);
 
-            var sandwichedDiscs = SearchOpponentDiscsSandwichedBy(playerDisc);
-            if (sandwichedDiscs.Count == 0)
+            var sandwichedOpponentDiscs = SearchOpponentDiscsSandwichedBy(playerDisc);
+            if (sandwichedOpponentDiscs.Count == 0)
                 throw new InvalidOperationException("You must sandwich at least one of your opponent's discs when placing your disc.");
-            FlipDiscs(sandwichedDiscs);
+            Flip(sandwichedOpponentDiscs);
         }
 
         private int CountFilledSquaresAdjacentTo(Position centralPosition)
@@ -57,9 +57,9 @@ namespace Othello.RuleEngine
         private bool IsSquareFilledAt(Position position) 
             => this[position].HasDisc;
 
-        private void FlipDiscs(IEnumerable<PlacedDisc> placedDiscs)
+        private void Flip(IEnumerable<PlacedDisc> discs)
         {
-            foreach (var disc in placedDiscs)
+            foreach (var disc in discs)
             {
                 disc.Flip();
             }
