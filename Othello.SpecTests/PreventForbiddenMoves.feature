@@ -43,14 +43,16 @@ Scenario: Cannot place a disc in a position that does not sandwich any opponent 
 	| f6                       | Black  |
 
 Scenario: Cannot place a disc in a position that is not (8-way) adjacent to any disc
-	When <player> tries to place a disc in square <invalid position>
-	Then an error is issued saying "You must place your disc directly next to another one (vertically, horizontally or diagonally)."
+	When <player> tries to place a disc in square <non-adjacent position>
+	Then an error is issued saying "You must place your disc adjacent to another one (vertically, horizontally or diagonally)."
 	Examples: 
-	| invalid position | player |
-	| a1               | Black  |
-	| d2               | Black  |
-	| g4               | White  |
-	| h8               | White  |
+	| non-adjacent position | player |
+	| a1                    | Black  |
+	| b2                    | Black  |
+	| c2                    | Black  |
+	| d2                    | White  |
+	| g4                    | White  |
+	| h8                    | White  |
 
 #TODO Alternate players 
 #- check the same player does not play twice
