@@ -6,49 +6,40 @@ namespace Othello.RuleEngine
     public class Square
     {
         public Position Position { get; }
-        public Disc Disc { get; private set; }
+        public PlacedDisc? Disc { get; private set; }
 
         public Square(Position position)
         {
             Position = position;
         }
 
-        public void PlaceADisc(Disc disc)
+        public PlacedDisc PlaceADiscOnSide(Side discSide)
         {
-            if (disc == Disc.None)
-                throw new InvalidOperationException("You cannot remove a disc from a square.");
-            if (IsFilled)
-                throw new InvalidOperationException("You cannot put a disc in an already filled square.");
+            if (HasDisc)
+                throw new InvalidOperationException("You cannot place a disc in an already filled square.");
 
-            Disc = disc;
+            Disc = new (this, discSide);
+            return Disc;
         }
 
-        public void FlipDisc()
-        {
-            if (IsEmpty)
-                throw new InvalidOperationException("You cannot flip the disc of an empty square.");
-
-            Disc = Disc.Flipped();
-        }
-
-        public bool IsEmpty => Disc == Disc.None;
-        public bool IsFilled => !IsEmpty;
-
-        public bool IsBlackFacingUp => Disc == Disc.BlackSideUp;
-        public bool IsWhiteFacingUp => Disc == Disc.WhiteSideUp;
-
+        public bool IsEmpty => Disc is null;
+        public bool HasDisc => !IsEmpty;
+        public bool HasBlackDisc => Disc is not null && Disc.IsBlackSideUp;
+        public bool HasWhiteDisc => Disc is not null && Disc.IsWhiteSideUp;
+        
         public override string ToString()
         {
             return this switch
             {
-                var s when s.IsEmpty => " ",
-                var s when s.IsBlackFacingUp => "B",
-                var s when s.IsWhiteFacingUp => "W",
+                var sq when sq.IsEmpty => " ",
+                var sq when sq.HasBlackDisc => "B",
+                var sq when sq.HasWhiteDisc => "W",
+
                 _ => "?"
             };
         }
 
-        internal bool HasDisc(Disc disc)
-            => Disc == disc;
+        internal bool HasDiscWithSideUp(Side side)
+            => Disc is not null && Disc.Side == side;
     }
 }

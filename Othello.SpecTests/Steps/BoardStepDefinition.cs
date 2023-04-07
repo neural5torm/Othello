@@ -39,9 +39,9 @@ namespace Othello.SpecTests.Steps
         public void GivenPlayerPlacedADiscInSquare(string player, string position)
         {
             var board = GetBoard();
-            Disc disc = DiscOfPlayer(player);
+            Side disc = DiscOfPlayer(player);
 
-            board.PlayMove(disc, position);
+            board.PlayerPlaysAtPosition(disc, position);
         }
 
         [When(@"I create an initial Othello board")]
@@ -61,9 +61,9 @@ namespace Othello.SpecTests.Steps
         public void WhenPlayerPlacesADiscInSquare(string player, string position)
         {
             var board = GetBoard();
-            Disc disc = DiscOfPlayer(player);
+            Side disc = DiscOfPlayer(player);
 
-            board.PlayMove(disc, position);
+            board.PlayerPlaysAtPosition(disc, position);
         }
 
         [When(@"(.+) tries to place a disc in square (.+)")]
@@ -74,7 +74,7 @@ namespace Othello.SpecTests.Steps
 
             try
             {
-                board.PlayMove(disc, position);
+                board.PlayerPlaysAtPosition(disc, position);
             }
             catch (Exception e)
             {
@@ -94,11 +94,12 @@ namespace Othello.SpecTests.Steps
 
                 foreach (var columnHeader in table.Header.Skip(1))
                 {
-                    var expectedDisc = row[columnHeader].ToDisc();
+                    var expectedDisc = row[columnHeader];
                     string position = columnHeader + rowHeader;
 
                     board[position]
-                        .Disc
+                        .ToString()
+                        .Trim() 
                         .Should()
                         .Be(expectedDisc, $"{expectedDisc} disc is expected at {position}");
                 }
@@ -116,14 +117,14 @@ namespace Othello.SpecTests.Steps
                 .Be(errorMessage);
         }
 
-
-        private static Disc DiscOfPlayer(string player)
+        // TODO: Use this!!
+        private static Side DiscOfPlayer(string player)
         {
             return player switch
             {
-                "Black" => Disc.BlackSideUp,
-                "White" => Disc.WhiteSideUp,
-                _ => Disc.None
+                "Black" => Side.Black,
+                "White" => Side.White,
+                _ => throw new NotSupportedException()
             };
         }
 

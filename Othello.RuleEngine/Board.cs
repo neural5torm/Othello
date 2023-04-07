@@ -29,94 +29,90 @@ namespace Othello.RuleEngine
             }
         }
 
-        public void PlayMove(Disc disc, Position squarePosition)
+        public void PlayerPlaysAtPosition(Side playerSide, Position position)
         {
-            if (CountAdjacentFilledSquares(squarePosition) == 0)
+            if (CountFilledSquaresAdjacentTo(position) == 0)
                 throw new InvalidOperationException("You must place your disc directly next to another one (vertically, horizontally or diagonally).");
 
-            var square = PlaceDisc(disc, squarePosition);
+            var square = this[position];
+            var playerDisc = square.PlaceADiscOnSide(playerSide);
 
-            if (FlipDiscsSandwichedByNewDisc(square) == 0)
-                throw new InvalidOperationException("Your disc must sandwich at least one of your opponent's discs.");
+            var sandwichedDiscs = SearchOpponentDiscsSandwichedBy(playerDisc);
+            if (sandwichedDiscs.Count == 0)
+                throw new InvalidOperationException("You must sandwich at least one of your opponent's discs when placing your disc.");
+            FlipDiscs(sandwichedDiscs);
         }
 
-        private int CountAdjacentFilledSquares(Position squarePosition)
+        private int CountFilledSquaresAdjacentTo(Position centralPosition)
         {
             var adjacentFilledPositions = Directions.All()
-                .Select(direction => squarePosition.NextPosition(direction))
-                .Where(position => IsPositionValidOnBoard(position) &&
-                    this[position!].IsFilled);
+                .Select(centralPosition.NextPositionInDirection)      //
+                .Where(position => position is not InvalidPosition && // TODO: create a simpler helper
+                    IsPositionWithinBounds(position) &&               // 
+                    IsSquareFilledAt(position));
 
             return adjacentFilledPositions.Count();
         }
 
-        private Square PlaceDisc(Disc disc, Position squarePosition)
-        {
-            var square = this[squarePosition];
-            square.PlaceADisc(disc);
-            return square;
-        }
+        private bool IsSquareFilledAt(Position position) 
+            => this[position].HasDisc;
 
-        private int FlipDiscsSandwichedByNewDisc(Square newDiscSquare)
+        private void FlipDiscs(IEnumerable<PlacedDisc> placedDiscs)
         {
-            var squaresOfSandwichedDiscs = SearchSquaresOfSandwichedDiscs(newDiscSquare);
-
-            squaresOfSandwichedDiscs.ForEach(square =>
+            foreach (var disc in placedDiscs)
             {
-                square.FlipDisc();
-            });
-
-            return squaresOfSandwichedDiscs.Count;
+                disc.Flip();
+            }
         }
 
-        private List<Square> SearchSquaresOfSandwichedDiscs(Square newDiscSquare)
+        private List<PlacedDisc> SearchOpponentDiscsSandwichedBy(PlacedDisc playerDisc)
         {
             return Directions.All()
-                .Select(direction => SearchSquaresOfSandwichedDiscs(newDiscSquare, direction))
-                .SelectMany(squares => squares)
+                .Select(direction => SearchOpponentDiscsSandwichedInDirection(playerDisc, direction))
+                .SelectMany(discs => discs)
                 .ToList();
         }
 
-        private IEnumerable<Square> SearchSquaresOfSandwichedDiscs(Square newDiscSquare, Direction direction)
+        private IEnumerable<PlacedDisc> SearchOpponentDiscsSandwichedInDirection(PlacedDisc playerDisc, Direction direction)
         {
-            var playerDisc = newDiscSquare.Disc;
-            var opponentDisc = playerDisc.Flipped();
+            var playerSide = playerDisc.Side;
+            var opponentSide = playerSide.GetOppositeSide();
 
-            var squaresOfSandwichedDiscs = new List<Square>();
-            for (var position = newDiscSquare.Position.NextPosition(direction); 
-                position is not null && IsPositionValidOnBoard(position); 
-                position = position.NextPosition(direction))
+            var sandwichedOpponentDiscs = new List<PlacedDisc>();
+            for (var position = playerDisc.InSquare.Position.NextPositionInDirection(direction);//TODO: simplify with a helper method
+                position is not InvalidPosition && IsPositionWithinBounds(position);//TODO: idem
+                position = position.NextPositionInDirection(direction))
             {
-                var evaluatedSquare = this[position];
-                if (evaluatedSquare.HasDisc(opponentDisc))
+                var currentSquare = this[position];
+                if (currentSquare.HasDiscWithSideUp(opponentSide))
                 {
-                    squaresOfSandwichedDiscs.Add(evaluatedSquare);
+                    sandwichedOpponentDiscs.Add(currentSquare.Disc!);
                 }
-                else if (evaluatedSquare.HasDisc(playerDisc))
+                else if (currentSquare.HasDiscWithSideUp(playerSide))
                 {
-                    return squaresOfSandwichedDiscs;
+                    return sandwichedOpponentDiscs;
                 }
-                else if (evaluatedSquare.IsEmpty)
+                else if (currentSquare.IsEmpty)
                 {
-                    return Enumerable.Empty<Square>();
+                    return Enumerable.Empty<PlacedDisc>();
                 }
             }
 
-            return Enumerable.Empty<Square>();
+            return Enumerable.Empty<PlacedDisc>();
         }
 
-        private bool IsPositionValidOnBoard(Position? position)
-            => position is not null && position.IsValidForDimension(dimension);
+        private bool IsPositionWithinBounds(Position position)
+            => position.IsValidForDimension(dimension);
 
         private void CreateEmptySquares()
         {
-            Position.AllPositionsForBoardDimension(dimension)
-                .Select(position => new Square(position))
-                .ToList()
-                .ForEach(square =>
-                {
-                    squares[square.Position] = square;
-                });
+            var squares = Position.AllPositionsForBoardDimension(dimension)
+                .Select(position => new Square(position));
+
+            foreach (var square in squares)
+            {
+                this[square.Position] = square;
+            }
         }
 
         private IEnumerable<Square> CenterWhiteSquares
@@ -124,7 +120,7 @@ namespace Othello.RuleEngine
             get
             {
                 yield return this[dimension.CenterPosition];
-                yield return this[dimension.CenterPosition.NextPosition(Direction.SouthEast)!];                
+                yield return this[dimension.CenterPosition.NextPositionInDirection(Direction.SouthEast)];
             }
         }
 
@@ -132,8 +128,8 @@ namespace Othello.RuleEngine
         {
             get
             {
-                yield return this[dimension.CenterPosition.NextPosition(Direction.South)!];
-                yield return this[dimension.CenterPosition.NextPosition(Direction.East)!];
+                yield return this[dimension.CenterPosition.NextPositionInDirection(Direction.South)];
+                yield return this[dimension.CenterPosition.NextPositionInDirection(Direction.East)];
             }
         }
 
@@ -141,12 +137,12 @@ namespace Othello.RuleEngine
         {
             foreach (var centerWhiteSquare in CenterWhiteSquares)
             {
-                centerWhiteSquare.PlaceADisc(Disc.WhiteSideUp);
+                centerWhiteSquare.PlaceADiscOnSide(Side.White);
             }
 
             foreach (var centerBlackSquare in CenterBlackSquares)
             {
-                centerBlackSquare.PlaceADisc(Disc.BlackSideUp);
+                centerBlackSquare.PlaceADiscOnSide(Side.Black);
             }
         }
     }

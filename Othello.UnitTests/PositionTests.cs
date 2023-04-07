@@ -104,7 +104,7 @@ namespace Othello.UnitTests
             Position fromPosition = from;
 
             // Act
-            var nextPosition = fromPosition.NextPosition(direction);
+            var nextPosition = fromPosition.NextPositionInDirection(direction);
 
             // Assert
             nextPosition.Should()
@@ -124,11 +124,11 @@ namespace Othello.UnitTests
             Position fromPosition = from;
             
             // Act
-            var nextPosition = fromPosition.NextPosition(direction);
+            var nextPosition = fromPosition.NextPositionInDirection(direction);
 
             // Assert
             nextPosition.Should()
-                .BeNull();
+                .BeOfType<InvalidPosition>();
         }
     }
 }

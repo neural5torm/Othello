@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Othello.ValueObjects
 {
@@ -40,7 +39,7 @@ namespace Othello.ValueObjects
                 Row < IndexExtensions.MinIndex + dimension.Length;
         }
 
-        public Position? NextPosition(Direction direction)
+        public Position NextPositionInDirection(Direction direction)
         {
             if (Column == IndexExtensions.MinIndex &&
                 (direction == Direction.NorthWest ||
@@ -51,12 +50,12 @@ namespace Othello.ValueObjects
                 (direction == Direction.North ||
                 direction == Direction.NorthEast ||
                 direction == Direction.NorthWest))
-                return null;
+                return new InvalidPosition();
 
-            var change = direction.ToPositionChange();
+            var positionChange = direction.ToPositionChange();
 
-            return new(Convert.ToSByte(Column + change.ColumnDelta), 
-                Convert.ToSByte(Row + change.RowDelta));
+            return new(Convert.ToSByte(Column + positionChange.VerticalDelta), 
+                Convert.ToSByte(Row + positionChange.HorizontalDelta));
         }
 
         public static implicit operator string(Position position)
@@ -88,4 +87,6 @@ namespace Othello.ValueObjects
 
         public static Position Origin => new(IndexExtensions.MinIndex, IndexExtensions.MinIndex);
     }
+
+    public record InvalidPosition() : Position(IndexExtensions.MinIndex, IndexExtensions.MinIndex);
 }

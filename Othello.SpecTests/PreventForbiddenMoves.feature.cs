@@ -93,8 +93,10 @@ namespace Othello.SpecTests
         [Xunit.TraitAttribute("FeatureTitle", "Prevent forbidden moves")]
         [Xunit.TraitAttribute("Description", "Cannot place a disc in any of the already filled square of the central 2x2 grid")]
         [Xunit.InlineDataAttribute("d4", "Black", new string[0])]
+        [Xunit.InlineDataAttribute("d4", "White", new string[0])]
         [Xunit.InlineDataAttribute("d5", "Black", new string[0])]
-        [Xunit.InlineDataAttribute("e4", "White", new string[0])]
+        [Xunit.InlineDataAttribute("d5", "White", new string[0])]
+        [Xunit.InlineDataAttribute("e4", "Black", new string[0])]
         [Xunit.InlineDataAttribute("e5", "White", new string[0])]
         public virtual void CannotPlaceADiscInAnyOfTheAlreadyFilledSquareOfTheCentral2X2Grid(string centralPosition, string player, string[] exampleTags)
         {
@@ -103,7 +105,7 @@ namespace Othello.SpecTests
             argumentsOfScenario.Add("central position", centralPosition);
             argumentsOfScenario.Add("player", player);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Cannot place a disc in any of the already filled square of the central 2x2 grid", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 6
+#line 15
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -126,11 +128,11 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line hidden
-#line 7
+#line 16
  testRunner.When(string.Format("{0} tries to place a disc in square {1}", player, centralPosition), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 8
- testRunner.Then("an error is issued saying \"You cannot put a disc in an already filled square.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 17
+ testRunner.Then("an error is issued saying \"You cannot place a disc in an already filled square.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -139,18 +141,26 @@ this.FeatureBackground();
         [Xunit.SkippableTheoryAttribute(DisplayName="Cannot place a disc in a position that does not sandwich any opponent disc")]
         [Xunit.TraitAttribute("FeatureTitle", "Prevent forbidden moves")]
         [Xunit.TraitAttribute("Description", "Cannot place a disc in a position that does not sandwich any opponent disc")]
-        [Xunit.InlineDataAttribute("c5", "Black", new string[0])]
-        [Xunit.InlineDataAttribute("f4", "Black", new string[0])]
+        [Xunit.InlineDataAttribute("c3", "White", new string[0])]
         [Xunit.InlineDataAttribute("c4", "White", new string[0])]
+        [Xunit.InlineDataAttribute("c5", "Black", new string[0])]
+        [Xunit.InlineDataAttribute("c6", "Black", new string[0])]
+        [Xunit.InlineDataAttribute("d3", "White", new string[0])]
+        [Xunit.InlineDataAttribute("d6", "Black", new string[0])]
+        [Xunit.InlineDataAttribute("e3", "Black", new string[0])]
+        [Xunit.InlineDataAttribute("e6", "White", new string[0])]
+        [Xunit.InlineDataAttribute("f3", "White", new string[0])]
+        [Xunit.InlineDataAttribute("f4", "Black", new string[0])]
         [Xunit.InlineDataAttribute("f5", "White", new string[0])]
-        public virtual void CannotPlaceADiscInAPositionThatDoesNotSandwichAnyOpponentDisc(string invalidPosition, string player, string[] exampleTags)
+        [Xunit.InlineDataAttribute("f6", "Black", new string[0])]
+        public virtual void CannotPlaceADiscInAPositionThatDoesNotSandwichAnyOpponentDisc(string non_SandwichingPosition, string player, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("invalid position", invalidPosition);
+            argumentsOfScenario.Add("non-sandwiching position", non_SandwichingPosition);
             argumentsOfScenario.Add("player", player);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Cannot place a disc in a position that does not sandwich any opponent disc", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 16
+#line 27
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -173,12 +183,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line hidden
-#line 17
- testRunner.When(string.Format("{0} tries to place a disc in square {1}", player, invalidPosition), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 28
+ testRunner.When(string.Format("{0} tries to place a disc in square {1}", player, non_SandwichingPosition), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 18
- testRunner.Then("an error is issued saying \"Your disc must sandwich at least one of your opponent\'" +
-                        "s discs.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 29
+ testRunner.Then("an error is issued saying \"You must sandwich at least one of your opponent\'s disc" +
+                        "s when placing your disc.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -198,7 +208,7 @@ this.FeatureBackground();
             argumentsOfScenario.Add("invalid position", invalidPosition);
             argumentsOfScenario.Add("player", player);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Cannot place a disc in a position that is not (8-way) adjacent to any disc", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 26
+#line 45
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -221,10 +231,10 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line hidden
-#line 27
+#line 46
  testRunner.When(string.Format("{0} tries to place a disc in square {1}", player, invalidPosition), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 28
+#line 47
  testRunner.Then("an error is issued saying \"You must place your disc directly next to another one " +
                         "(vertically, horizontally or diagonally).\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
