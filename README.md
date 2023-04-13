@@ -1,2 +1,2 @@
 # Othello
-The classic Othello game written in C# 9.0.
+The classic Othello game written in C# 11.0.
