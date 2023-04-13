@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Othello.ValueObjects.Exceptions;
+using System;
 using System.Collections.Generic;
+using System.Data.Common;
 
 namespace Othello.ValueObjects
 {
@@ -16,31 +18,47 @@ namespace Othello.ValueObjects
     /// 
     /// Internally uses sbyte Column and Row indexes for easy and efficient mathematical manipulation.
     /// </summary>
-    public record Position(sbyte Column, sbyte Row)
+    public class Position
     {
-        sbyte Column { get; } 
-            = IndexExtensions.MinIndex <= Column && Column <= IndexExtensions.MaxIndex
-            ? Column
-            : throw new ArgumentOutOfRangeException(nameof(Column));
+        public sbyte Column { get; private set; }
+        public sbyte Row { get; private set; }
 
-        sbyte Row { get; } 
-            = IndexExtensions.MinIndex <= Row && Row <= IndexExtensions.MaxIndex
-            ? Row
-            : throw new ArgumentOutOfRangeException(nameof(Row));
+        protected Position(sbyte column, sbyte row, bool checkValidIndices)
+        {
+            Column = column;
+            Row = row;
+
+            if (checkValidIndices && !AreIndicesValid)
+                throw new InvalidPositionException($"Invalid position: c{column}:r{row}.");            
+        }
+
+        public Position(sbyte column, sbyte row)
+            : this(column, row, true)
+        { }
 
         public Position(string column, int row)
             : this(column.ToColumnIndex(), Convert.ToSByte(row))
-        {
-        }
+        { }
 
-        public bool IsValidForDimension(Dimension dimension)
+        private bool AreIndicesValid
+            =>  IndexExtensions.MinIndex <= Column && Column <= IndexExtensions.MaxIndex
+                &&
+                IndexExtensions.MinIndex <= Row && Row <= IndexExtensions.MaxIndex;        
+
+        private bool IsValid
+            => this is not InvalidPosition && AreIndicesValid;
+
+        public bool IsWithinBoundsOfDimension(Dimension dimension)
         {
-            return Column < IndexExtensions.MinIndex + dimension.Length &&
+            return IsValid &&
+                Column < IndexExtensions.MinIndex + dimension.Length &&
                 Row < IndexExtensions.MinIndex + dimension.Length;
         }
 
         public Position NextPositionInDirection(Direction direction)
         {
+            var positionChange = direction.ToPositionChange();
+
             if (Column == IndexExtensions.MinIndex &&
                 (direction == Direction.NorthWest ||
                 direction == Direction.West ||
@@ -50,21 +68,21 @@ namespace Othello.ValueObjects
                 (direction == Direction.North ||
                 direction == Direction.NorthEast ||
                 direction == Direction.NorthWest))
-                return new InvalidPosition();
+                return new InvalidPosition(Convert.ToSByte(Column + positionChange.VerticalDelta),
+                Convert.ToSByte(Row + positionChange.HorizontalDelta));
 
-            var positionChange = direction.ToPositionChange();
 
-            return new(Convert.ToSByte(Column + positionChange.VerticalDelta), 
+            return new(Convert.ToSByte(Column + positionChange.VerticalDelta),
                 Convert.ToSByte(Row + positionChange.HorizontalDelta));
         }
 
-        public static implicit operator string(Position position)
-            => $"{position.Column.ToColumnName()}{position.Row}";
-        
-        public override string ToString()
-           => this;
+        public static explicit operator string(Position position)
+            => position.ToString();
 
-        public static implicit operator Position(string position)
+        public override string ToString()
+           => $"{Column.ToColumnName()}{Row}";
+
+        public static explicit operator Position(string position)
         {
             var trimmed = position.Trim();
 
@@ -85,8 +103,18 @@ namespace Othello.ValueObjects
             }
         }
 
+        public override bool Equals(object? obj)
+        {
+            return obj is Position position &&
+                   Column == position.Column &&
+                   Row == position.Row;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Column, Row);
+        }
+
         public static Position Origin => new(IndexExtensions.MinIndex, IndexExtensions.MinIndex);
     }
-
-    public record InvalidPosition() : Position(IndexExtensions.MinIndex, IndexExtensions.MinIndex);
 }

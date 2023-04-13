@@ -157,7 +157,7 @@ this.FeatureBackground();
                             "",
                             ""});
 #line 8
- testRunner.Then("the board should look like", ((string)(null)), table5, "Then ");
+ testRunner.Then("the board should be like this", ((string)(null)), table5, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -231,7 +231,7 @@ this.FeatureBackground();
                             "",
                             ""});
 #line 18
- testRunner.Then("the board should look like", ((string)(null)), table6, "Then ");
+ testRunner.Then("the board should be like this", ((string)(null)), table6, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -308,7 +308,7 @@ this.FeatureBackground();
                             "",
                             ""});
 #line 29
- testRunner.Then("the board should look like", ((string)(null)), table7, "Then ");
+ testRunner.Then("the board should be like this", ((string)(null)), table7, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -388,7 +388,7 @@ this.FeatureBackground();
                             "",
                             ""});
 #line 41
- testRunner.Then("the board should look like", ((string)(null)), table8, "Then ");
+ testRunner.Then("the board should be like this", ((string)(null)), table8, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -471,7 +471,7 @@ this.FeatureBackground();
                             "",
                             ""});
 #line 54
- testRunner.Then("the board should look like", ((string)(null)), table9, "Then ");
+ testRunner.Then("the board should be like this", ((string)(null)), table9, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -557,7 +557,7 @@ this.FeatureBackground();
                             "",
                             ""});
 #line 68
- testRunner.Then("the board should look like", ((string)(null)), table10, "Then ");
+ testRunner.Then("the board should be like this", ((string)(null)), table10, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -646,7 +646,7 @@ this.FeatureBackground();
                             "B",
                             ""});
 #line 83
- testRunner.Then("the board should look like", ((string)(null)), table11, "Then ");
+ testRunner.Then("the board should be like this", ((string)(null)), table11, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -738,7 +738,7 @@ this.FeatureBackground();
                             "B",
                             "W"});
 #line 99
- testRunner.Then("the board should look like", ((string)(null)), table12, "Then ");
+ testRunner.Then("the board should be like this", ((string)(null)), table12, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -833,7 +833,7 @@ this.FeatureBackground();
                             "B",
                             "W"});
 #line 116
- testRunner.Then("the board should look like", ((string)(null)), table13, "Then ");
+ testRunner.Then("the board should be like this", ((string)(null)), table13, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -931,7 +931,7 @@ this.FeatureBackground();
                             "B",
                             "W"});
 #line 134
- testRunner.Then("the board should look like", ((string)(null)), table14, "Then ");
+ testRunner.Then("the board should be like this", ((string)(null)), table14, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -1032,7 +1032,7 @@ this.FeatureBackground();
                             "B",
                             "W"});
 #line 153
- testRunner.Then("the board should look like", ((string)(null)), table15, "Then ");
+ testRunner.Then("the board should be like this", ((string)(null)), table15, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -1136,7 +1136,7 @@ this.FeatureBackground();
                             "B",
                             "W"});
 #line 173
- testRunner.Then("the board should look like", ((string)(null)), table16, "Then ");
+ testRunner.Then("the board should be like this", ((string)(null)), table16, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

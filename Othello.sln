@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31515.178
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Othello.SpecTests", "Othello.SpecTests\Othello.SpecTests.csproj", "{E222046B-2BEB-4909-85BB-D10158A9C739}"
 EndProject
@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Othello.RuleEngine", "Othel
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Othello.ConsoleApp", "Othello.ConsoleApp\Othello.ConsoleApp.csproj", "{2D18657F-A179-4766-9EF6-706C11F0DF15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Othello.UnitTests", "Othello.UnitTests\Othello.UnitTests.csproj", "{90A48901-C158-4CE9-9BBF-DF2FC26B0950}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Othello.ValueObjectTests", "Othello.UnitTests\Othello.ValueObjectTests.csproj", "{90A48901-C158-4CE9-9BBF-DF2FC26B0950}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ABF7DC53-0C82-497A-8FBE-064AE1E3B7AD}"
 	ProjectSection(SolutionItems) = preProject

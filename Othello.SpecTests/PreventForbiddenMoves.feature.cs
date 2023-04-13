@@ -198,7 +198,9 @@ this.FeatureBackground();
         [Xunit.TraitAttribute("FeatureTitle", "Prevent forbidden moves")]
         [Xunit.TraitAttribute("Description", "Cannot place a disc in a position that is not (8-way) adjacent to any disc")]
         [Xunit.InlineDataAttribute("a1", "Black", new string[0])]
-        [Xunit.InlineDataAttribute("d2", "Black", new string[0])]
+        [Xunit.InlineDataAttribute("b2", "Black", new string[0])]
+        [Xunit.InlineDataAttribute("c2", "Black", new string[0])]
+        [Xunit.InlineDataAttribute("d2", "White", new string[0])]
         [Xunit.InlineDataAttribute("g4", "White", new string[0])]
         [Xunit.InlineDataAttribute("h8", "White", new string[0])]
         public virtual void CannotPlaceADiscInAPositionThatIsNot8_WayAdjacentToAnyDisc(string non_AdjacentPosition, string player, string[] exampleTags)
@@ -235,8 +237,8 @@ this.FeatureBackground();
  testRunner.When(string.Format("{0} tries to place a disc in square {1}", player, non_AdjacentPosition), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 47
- testRunner.Then("an error is issued saying \"You must place your disc adjacent to another one (vert" +
-                        "ically, horizontally or diagonally).\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("an error is issued saying \"Your disc must be adjacent to another one (vertically," +
+                        " horizontally or diagonally).\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

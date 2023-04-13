@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using Othello.RuleEngine;
-using Othello.SpecTests.Extensions;
 using Othello.ValueObjects;
 using System;
 using System.Linq;
@@ -39,9 +38,9 @@ namespace Othello.SpecTests.Steps
         public void GivenPlayerPlacedADiscInSquare(string player, string position)
         {
             var board = GetBoard();
-            Side disc = DiscOfPlayer(player);
+            ColorSide color = ColorForPlayer(player);
 
-            board.PlayerMakesMoveAt(disc, position);
+            board.PlayerMakesMoveAt(color, (Position)position);
         }
 
         [When(@"I create an initial Othello board")]
@@ -61,20 +60,20 @@ namespace Othello.SpecTests.Steps
         public void WhenPlayerPlacesADiscInSquare(string player, string position)
         {
             var board = GetBoard();
-            Side disc = DiscOfPlayer(player);
+            ColorSide disc = ColorForPlayer(player);
 
-            board.PlayerMakesMoveAt(disc, position);
+            board.PlayerMakesMoveAt(disc, (Position)position);
         }
 
         [When(@"(.+) tries to place a disc in square (.+)")]
         public void WhenPlayerTriesToPlaceADiscInSquare(string player, string position)
         {
             var board = GetBoard();
-            var disc = DiscOfPlayer(player);
+            var disc = ColorForPlayer(player);
 
             try
             {
-                board.PlayerMakesMoveAt(disc, position);
+                board.PlayerMakesMoveAt(disc, (Position)position);
             }
             catch (Exception e)
             {
@@ -83,8 +82,8 @@ namespace Othello.SpecTests.Steps
         }
 
 
-        [Then(@"the board should look like")]
-        public void ThenTheBoardShouldLookLike(Table table)
+        [Then(@"the board should be like this")]
+        public void ThenTheBoardShouldBeLikeThis(Table table)
         {
             var board = GetBoard();
 
@@ -94,14 +93,14 @@ namespace Othello.SpecTests.Steps
 
                 foreach (var columnHeader in table.Header.Skip(1))
                 {
-                    var expectedDisc = row[columnHeader];
+                    var expectedDiscSideUp = row[columnHeader];
                     string position = columnHeader + rowHeader;
 
-                    board[position]
+                    board[(Position)position]
                         .ToString()
                         .Trim() 
                         .Should()
-                        .Be(expectedDisc, $"{expectedDisc} disc is expected at {position}");
+                        .Be(expectedDiscSideUp, $"{expectedDiscSideUp} disc is expected at {position}");
                 }
             }
 
@@ -117,13 +116,12 @@ namespace Othello.SpecTests.Steps
                 .Be(errorMessage);
         }
 
-        // TODO: Use this!!
-        private static Side DiscOfPlayer(string player)
+        private static ColorSide ColorForPlayer(string player)
         {
             return player switch
             {
-                "Black" => Side.Black,
-                "White" => Side.White,
+                "Black" => ColorSide.Black,
+                "White" => ColorSide.White,
                 _ => throw new NotSupportedException()
             };
         }

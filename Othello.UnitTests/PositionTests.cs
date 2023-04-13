@@ -49,7 +49,7 @@ namespace Othello.UnitTests
         public void ConvertValidStringToPosition(string stringPosition, string expected)
         {
             // Act
-            Position position = stringPosition;
+            Position position = (Position)stringPosition;
 
             // Assert
             position.ToString()
@@ -101,7 +101,7 @@ namespace Othello.UnitTests
         public void GetNextPositionWithValidDirection(string from, Direction direction, string expectedNextPosition)
         {
             // Arrange
-            Position fromPosition = from;
+            Position fromPosition = (Position)from;
 
             // Act
             var nextPosition = fromPosition.NextPositionInDirection(direction);
@@ -112,16 +112,18 @@ namespace Othello.UnitTests
         }
 
         [Theory]
-        [InlineData(Direction.North, "h1")]
-        [InlineData(Direction.NorthEast, "h1")]
-        [InlineData(Direction.NorthWest, "h1")]
-        [InlineData(Direction.NorthWest, "a8")]
-        [InlineData(Direction.West, "a8")]
-        [InlineData(Direction.SouthWest, "a8")]
-        public void GetNextPositionWithInvalidDirection(Direction direction, string from)
+        [InlineData(Direction.North, "a1", "c1:r0")]
+        [InlineData(Direction.West, "a1", "c0:r1")]
+        [InlineData(Direction.North, "h1", "c8:r0")]
+        [InlineData(Direction.NorthEast, "h1", "c9:r0")]
+        [InlineData(Direction.NorthWest, "h1", "c7:r0")]
+        [InlineData(Direction.NorthWest, "a8", "c0:r7")]
+        [InlineData(Direction.West, "a8", "c0:r8")]
+        [InlineData(Direction.SouthWest, "a8", "c0:r9")]
+        public void GetNextInvalidPosition(Direction direction, string from, string to)
         {
             // Arrange
-            Position fromPosition = from;
+            Position fromPosition = (Position)from;
             
             // Act
             var nextPosition = fromPosition.NextPositionInDirection(direction);
@@ -129,6 +131,9 @@ namespace Othello.UnitTests
             // Assert
             nextPosition.Should()
                 .BeOfType<InvalidPosition>();
+            
+            ((string)nextPosition).Should()
+                .Be(to);
         }
     }
 }

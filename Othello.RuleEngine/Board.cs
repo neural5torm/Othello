@@ -1,4 +1,5 @@
 ﻿using Othello.ValueObjects;
+using Othello.ValueObjects.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,9 @@ namespace Othello.RuleEngine
         {
             get
             {
+                if (position is InvalidPosition invalid) 
+                    throw new InvalidPositionException(invalid);
+
                 return squares[position];
             }
             private set
@@ -29,27 +33,26 @@ namespace Othello.RuleEngine
             }
         }
 
-        public void PlayerMakesMoveAt(Side playerSide/*TODO: use player to determine side*/, Position position)
+        public void PlayerMakesMoveAt(ColorSide playerColor/*TODO: use player to determine side*/, Position position)
         {
             if (CountFilledSquaresAdjacentTo(position) == 0)
-                throw new InvalidOperationException("You must place your disc directly next to another one (vertically, horizontally or diagonally).");
+                throw new InvalidOperationException("Your disc must be adjacent to another one (vertically, horizontally or diagonally).");//TODO: create specific exception
 
             var square = this[position];
-            var playerDisc = square.PlaceADiscOnSide(playerSide);
+            var playerDisc = square.PlaceADiscWith(playerColor);
 
             var sandwichedOpponentDiscs = SearchOpponentDiscsSandwichedBy(playerDisc);
             if (sandwichedOpponentDiscs.Count == 0)
-                throw new InvalidOperationException("You must sandwich at least one of your opponent's discs when placing your disc.");
+                throw new InvalidOperationException("You must sandwich at least one of your opponent's discs when placing your disc.");//TODO: create specific exception
             Flip(sandwichedOpponentDiscs);
         }
 
         private int CountFilledSquaresAdjacentTo(Position centralPosition)
         {
             var adjacentFilledPositions = Directions.All()
-                .Select(centralPosition.NextPositionInDirection)      //
-                .Where(position => position is not InvalidPosition && // TODO: create a simpler helper
-                    IsPositionWithinBounds(position) &&               // 
-                    IsSquareFilledAt(position));
+                .Select(centralPosition.NextPositionInDirection)       //
+                .Where(position => IsPositionWithinBounds(position) && // TODO: create a simpler helper                                                                                                         
+                    IsSquareFilledAt(position));                       //
 
             return adjacentFilledPositions.Count();
         }
@@ -75,20 +78,20 @@ namespace Othello.RuleEngine
 
         private IEnumerable<PlacedDisc> SearchOpponentDiscsSandwichedInDirection(PlacedDisc playerDisc, Direction direction)
         {
-            var playerSide = playerDisc.Side;
-            var opponentSide = playerSide.GetOppositeSide();
+            var playerColor = playerDisc.ColorSideUp;
+            var opponentColor = playerColor.GetOtherSide();
 
             var sandwichedOpponentDiscs = new List<PlacedDisc>();
-            for (var position = playerDisc.InSquare.Position.NextPositionInDirection(direction);//TODO: simplify with a helper method
-                position is not InvalidPosition && IsPositionWithinBounds(position);//TODO: idem
+            for (var position = playerDisc.InSquare.Position.NextPositionInDirection(direction); //TODO: simplify with a helper method
+                IsPositionWithinBounds(position);
                 position = position.NextPositionInDirection(direction))
             {
                 var currentSquare = this[position];
-                if (currentSquare.HasDiscWithSideUp(opponentSide))
+                if (currentSquare.HasDiscWith(opponentColor))
                 {
                     sandwichedOpponentDiscs.Add(currentSquare.Disc!);
                 }
-                else if (currentSquare.HasDiscWithSideUp(playerSide))
+                else if (currentSquare.HasDiscWith(playerColor))
                 {
                     return sandwichedOpponentDiscs;
                 }
@@ -102,7 +105,7 @@ namespace Othello.RuleEngine
         }
 
         private bool IsPositionWithinBounds(Position position)
-            => position.IsValidForDimension(dimension);
+            => position.IsWithinBoundsOfDimension(dimension);
 
         private void CreateEmptySquares()
         {
@@ -119,8 +122,8 @@ namespace Othello.RuleEngine
         {
             get
             {
-                yield return this[dimension.CenterPosition];
-                yield return this[dimension.CenterPosition.NextPositionInDirection(Direction.SouthEast)];
+                yield return this[dimension.CenterTopLeftPosition];
+                yield return this[dimension.CenterTopLeftPosition.NextPositionInDirection(Direction.SouthEast)];
             }
         }
 
@@ -128,8 +131,8 @@ namespace Othello.RuleEngine
         {
             get
             {
-                yield return this[dimension.CenterPosition.NextPositionInDirection(Direction.South)];
-                yield return this[dimension.CenterPosition.NextPositionInDirection(Direction.East)];
+                yield return this[dimension.CenterTopLeftPosition.NextPositionInDirection(Direction.East)];
+                yield return this[dimension.CenterTopLeftPosition.NextPositionInDirection(Direction.South)];
             }
         }
 
@@ -137,12 +140,12 @@ namespace Othello.RuleEngine
         {
             foreach (var centerWhiteSquare in CenterWhiteSquares)
             {
-                centerWhiteSquare.PlaceADiscOnSide(Side.White);
+                centerWhiteSquare.PlaceADiscWith(ColorSide.White);
             }
 
             foreach (var centerBlackSquare in CenterBlackSquares)
             {
-                centerBlackSquare.PlaceADiscOnSide(Side.Black);
+                centerBlackSquare.PlaceADiscWith(ColorSide.Black);
             }
         }
     }

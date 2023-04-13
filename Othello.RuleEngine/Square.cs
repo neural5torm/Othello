@@ -13,33 +13,38 @@ namespace Othello.RuleEngine
             Position = position;
         }
 
-        public PlacedDisc PlaceADiscOnSide(Side discSide)
+        public PlacedDisc PlaceADiscWith(ColorSide colorSideUp)
         {
             if (HasDisc)
                 throw new InvalidOperationException("You cannot place a disc in an already filled square.");
 
-            Disc = new (this, discSide);
+            Disc = new (this, colorSideUp);
             return Disc;
         }
 
         public bool IsEmpty => Disc is null;
         public bool HasDisc => !IsEmpty;
-        public bool HasBlackDisc => Disc is not null && Disc.IsBlackSideUp;
-        public bool HasWhiteDisc => Disc is not null && Disc.IsWhiteSideUp;
+
+        public bool HasDiscWithBlackSideUp => Disc is not null && Disc.IsBlackSideUp;
+        public bool HasDiscWithWhiteSideUp => Disc is not null && Disc.IsWhiteSideUp;
         
+        /// <summary>
+        /// Represents the contents of the square: blank for empty, B for disc with Black side up, W for White side up.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return this switch
             {
                 var sq when sq.IsEmpty => " ",
-                var sq when sq.HasBlackDisc => "B",
-                var sq when sq.HasWhiteDisc => "W",
+                var sq when sq.HasDiscWithBlackSideUp => "B",
+                var sq when sq.HasDiscWithWhiteSideUp => "W",
 
                 _ => "?"
             };
         }
 
-        internal bool HasDiscWithSideUp(Side side)
-            => Disc is not null && Disc.Side == side;
+        internal bool HasDiscWith(ColorSide colorSideUp)
+            => Disc is not null && Disc.ColorSideUp == colorSideUp;
     }
 }

@@ -18,7 +18,7 @@ namespace Othello.ValueObjects
                 throw new ArgumentOutOfRangeException(nameof(length));
 
             if (length % 2  != 0) 
-                throw new UnevenDimensionException();
+                throw new UnevenDimensionException($"Othello board cannot be of uneven dimension: {length}.");
 
             Length = length;
         }
@@ -27,7 +27,7 @@ namespace Othello.ValueObjects
         
         public IEnumerable<int> Indices => Enumerable.Range(1, Length);
 
-        public Position CenterPosition => new(HalfLength, HalfLength);
+        public Position CenterTopLeftPosition => new(HalfLength, HalfLength);
 
         public static explicit operator Dimension(int length)
             => new(Convert.ToSByte(length));
