@@ -8,12 +8,12 @@ namespace Othello.RuleEngine
 {
     public class Board
     {
-        private readonly Dimension dimension;
         private readonly Dictionary<Position, Square> squares = new();
+        public Dimension Dimension { get; init; }
 
         public Board(Dimension dimension)
         {
-            this.dimension = dimension;
+            Dimension = dimension;
             CreateEmptySquares();
             SetInitialState();
         }
@@ -105,11 +105,11 @@ namespace Othello.RuleEngine
         }
 
         private bool IsPositionWithinBounds(Position position)
-            => position.IsWithinBoundsOfDimension(dimension);
+            => position.IsWithinBoundsOfBoardDimension(Dimension);
 
         private void CreateEmptySquares()
         {
-            var squares = Position.AllPositionsForBoardDimension(dimension)
+            var squares = Position.AllPositionsForBoardDimension(Dimension)
                 .Select(position => new Square(position));
 
             foreach (var square in squares)
@@ -122,8 +122,8 @@ namespace Othello.RuleEngine
         {
             get
             {
-                yield return this[dimension.CenterTopLeftPosition];
-                yield return this[dimension.CenterTopLeftPosition.NextPositionInDirection(Direction.SouthEast)];
+                yield return this[Dimension.CenterTopLeftPosition];
+                yield return this[Dimension.CenterTopLeftPosition.NextPositionInDirection(Direction.SouthEast)];
             }
         }
 
@@ -131,8 +131,8 @@ namespace Othello.RuleEngine
         {
             get
             {
-                yield return this[dimension.CenterTopLeftPosition.NextPositionInDirection(Direction.East)];
-                yield return this[dimension.CenterTopLeftPosition.NextPositionInDirection(Direction.South)];
+                yield return this[Dimension.CenterTopLeftPosition.NextPositionInDirection(Direction.East)];
+                yield return this[Dimension.CenterTopLeftPosition.NextPositionInDirection(Direction.South)];
             }
         }
 

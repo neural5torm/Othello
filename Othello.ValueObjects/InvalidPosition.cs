@@ -2,10 +2,11 @@
 {
     public class InvalidPosition : Position
     {
-        public InvalidPosition(sbyte column, sbyte row) : base(column, row, checkValidIndices: false)
+        public InvalidPosition(sbyte invalidColumnIndex, sbyte invalidRowIndex) 
+            : base(invalidColumnIndex, invalidRowIndex, checkValidIndices: false)
         { }
         public override string ToString()
-           => $"c{Column}:r{Row}";
+           => $"c{ColumnIndex}:r{RowIndex}";
 
         public static explicit operator string(InvalidPosition position)
             => position.ToString();
