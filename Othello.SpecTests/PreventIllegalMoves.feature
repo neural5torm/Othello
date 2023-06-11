@@ -1,4 +1,4 @@
-﻿Feature: Prevent forbidden moves
+﻿Feature: Prevent illegal moves
 
 Background: 
 	Given an initial Othello board is created
@@ -54,11 +54,19 @@ Scenario: Cannot place a disc in a position that is not (8-way) adjacent to any 
 	| g4                    | White  |
 	| h8                    | White  |
 
-#TODO Alternate players 
-#- check the same player does not play twice
-#- check the player has a valid move (or should pass)
-#- check end of game (each player has to pass/not any empty square)
+# Scenario: White cannot place a disc first (Black always plays first in Othello)
+
+# Scenario: Current player cannot pass if he has at least one legal move
+
+# Scenario: Current player can only play once if opponent has at least one legal move (exchange White+Black in test)
+
+# Scenario: Player cannot place a disc if he has no legal move 
+
+#TODO
+# check player can pass and opponent can thus play twice (valid case, move somewhere else)
+# check game is over if both players must pass twice in a row (+players can no longer place any disk)
+# check game is over if board is full (+players can no longer place any disk)
 
 #TODO Keep scores
-#- check scores
-#- check winner/loser
+# check scores are updated after each move accordingly
+# check winner has the most points, loser the least and tie is equal (+handicap? +add points for all remaining empty squares)
