@@ -16,9 +16,9 @@ namespace Othello.RuleEngine
         public PlacedDisc PlaceADiscWith(ColorSide colorSideUp)
         {
             if (HasDisc)
-                throw new InvalidOperationException("You cannot place a disc in an already filled square.");
+                throw new InvalidMoveException("You cannot place a disc in an already filled square.");
 
-            Disc = new (this, colorSideUp);
+            Disc = new(this, colorSideUp);
             return Disc;
         }
 
@@ -27,7 +27,7 @@ namespace Othello.RuleEngine
 
         public bool HasDiscWithBlackSideUp => Disc is not null && Disc.IsBlackSideUp;
         public bool HasDiscWithWhiteSideUp => Disc is not null && Disc.IsWhiteSideUp;
-        
+
         /// <summary>
         /// Represents the contents of the square: blank for empty, B for disc with Black side up, W for White side up.
         /// </summary>

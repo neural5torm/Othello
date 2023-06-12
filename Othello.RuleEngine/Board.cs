@@ -22,7 +22,7 @@ namespace Othello.RuleEngine
         {
             get
             {
-                if (position is InvalidPosition invalid) 
+                if (position is InvalidPosition invalid)
                     throw new InvalidPositionException(invalid);
 
                 return squares[position];
@@ -36,14 +36,14 @@ namespace Othello.RuleEngine
         public void PlayerMakesMoveAt(ColorSide playerColor/*TODO: use player to determine side*/, Position position)
         {
             if (CountFilledSquaresAdjacentTo(position) == 0)
-                throw new InvalidOperationException("Your disc must be adjacent to another one (vertically, horizontally or diagonally).");//TODO: create specific exception
+                throw new InvalidMoveException("Your disc must be adjacent to another one (vertically, horizontally or diagonally).");//TODO: create specific exception
 
             var square = this[position];
             var playerDisc = square.PlaceADiscWith(playerColor);
 
             var sandwichedOpponentDiscs = SearchOpponentDiscsSandwichedBy(playerDisc);
             if (sandwichedOpponentDiscs.Count == 0)
-                throw new InvalidOperationException("You must sandwich at least one of your opponent's discs when placing your disc.");//TODO: create specific exception
+                throw new InvalidMoveException("You must sandwich at least one of your opponent's discs when placing your disc.");//TODO: create specific exception
             Flip(sandwichedOpponentDiscs);
         }
 
@@ -57,7 +57,7 @@ namespace Othello.RuleEngine
             return adjacentFilledPositions.Count();
         }
 
-        private bool IsSquareFilledAt(Position position) 
+        private bool IsSquareFilledAt(Position position)
             => this[position].HasDisc;
 
         private void Flip(IEnumerable<PlacedDisc> discs)
