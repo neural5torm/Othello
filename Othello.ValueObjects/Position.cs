@@ -1,6 +1,7 @@
 ﻿using Othello.ValueObjects.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Othello.ValueObjects
 {
@@ -22,13 +23,15 @@ namespace Othello.ValueObjects
         public sbyte ColumnIndex { get; private set; }
         public sbyte RowIndex { get; private set; }
 
+        private static readonly Regex positionFormat = new(@"^[a-z]\s*\d{1,2}$", RegexOptions.IgnoreCase);
+
         protected Position(sbyte columnIndex, sbyte rowIndex, bool checkValidIndices)
         {
             ColumnIndex = columnIndex;
             RowIndex = rowIndex;
 
             if (checkValidIndices && !AreIndicesValid)
-                throw new InvalidPositionException($"Invalid position: c{columnIndex}:r{rowIndex}.");            
+                throw new InvalidPositionException($"Invalid position: c{columnIndex}:r{rowIndex}.");
         }
 
         public Position(sbyte columnIndex, sbyte rowIndex)
@@ -40,9 +43,9 @@ namespace Othello.ValueObjects
         { }
 
         private bool AreIndicesValid
-            =>  IndexExtensions.MinIndex <= ColumnIndex && ColumnIndex <= IndexExtensions.MaxIndex
+            => IndexExtensions.MinIndex <= ColumnIndex && ColumnIndex <= IndexExtensions.MaxIndex
                 &&
-                IndexExtensions.MinIndex <= RowIndex && RowIndex <= IndexExtensions.MaxIndex;        
+                IndexExtensions.MinIndex <= RowIndex && RowIndex <= IndexExtensions.MaxIndex;
 
         private bool IsValid
             => this is not InvalidPosition && AreIndicesValid;
@@ -84,6 +87,8 @@ namespace Othello.ValueObjects
         public static explicit operator Position(string position)
         {
             var trimmed = position.Trim();
+            if (!positionFormat.IsMatch(trimmed))
+                throw new FormatException("Position string literals should be formatted as A1, A2 or a1, a2, etc.");
 
             var column = trimmed[..1];
             var row = int.Parse(trimmed[1..]);

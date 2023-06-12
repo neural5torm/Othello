@@ -34,7 +34,7 @@ namespace Othello.SpecTests.Steps
             CreateInitialBoard(dimension);
         }
 
-        [Given(@"(Black|White) placed a disc in square (.{2})")]
+        [Given(@"(Black|White) placed a disc in square ([a-z]\d)")]
         public void GivenPlayerPlacedADiscInSquare(string player, string position)
         {
             var board = GetBoard();
@@ -56,7 +56,7 @@ namespace Othello.SpecTests.Steps
             CreateInitialBoard(dimension);
         }
 
-        [When(@"(Black|White) places a disc in square (.{2})")]
+        [When(@"(Black|White) places a disc in square ([a-z]\d)")]
         public void WhenPlayerPlacesADiscInSquare(string player, string position)
         {
             var board = GetBoard();
@@ -65,15 +65,16 @@ namespace Othello.SpecTests.Steps
             board.PlayerMakesMoveAt(disc, (Position)position);
         }
 
-        [When(@"(.+) tries to place a disc in square (.+)")]
+        [When(@"(.+) tries to place a disc in square ([a-z]\d)")]
         public void WhenPlayerTriesToPlaceADiscInSquare(string player, string position)
         {
             var board = GetBoard();
             var disc = ColorForPlayer(player);
+            var validatedPosition = (Position)position;
 
             try
             {
-                board.PlayerMakesMoveAt(disc, (Position)position);
+                board.PlayerMakesMoveAt(disc, validatedPosition);
             }
             catch (Exception e)
             {
@@ -98,7 +99,7 @@ namespace Othello.SpecTests.Steps
 
                     board[(Position)position]
                         .ToString()
-                        .Trim() 
+                        .Trim()
                         .Should()
                         .Be(expectedDiscSideUp, $"{expectedDiscSideUp} disc is expected at {position}");
                 }

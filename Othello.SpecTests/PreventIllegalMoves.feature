@@ -56,7 +56,7 @@ Scenario: Cannot place a disc in a position that is not (8-way) adjacent to any 
 
 
 Scenario: White cannot make a valid move first (Black always plays first in Othello)
-	When White tries to place a disc in square 3e
+	When White tries to place a disc in square e3
 	Then an error is issued saying "Black must make their move first."
 
 # Scenario: Current player cannot pass if he has at least one legal move

@@ -7,7 +7,7 @@ using Xunit;
 namespace Othello.UnitTests
 {
     public class PositionTests
-    {      
+    {
         [Theory]
         [InlineData("a", 1, "a1")]
         [InlineData("A ", 18, "a18")]
@@ -16,7 +16,7 @@ namespace Othello.UnitTests
         {
             // Act
             var position = new Position(column, row);
-            
+
             // Assert
             position.ToString()
                 .Should()
@@ -44,8 +44,8 @@ namespace Othello.UnitTests
         [Theory]
         [InlineData("a1", "a1")]
         [InlineData("A01", "a1")]
-        [InlineData("A 10", "a10")]
         [InlineData(" h8  ", "h8")]
+        [InlineData("Z 10", "z10")]
         public void ConvertValidStringToPosition(string stringPosition, string expected)
         {
             // Act
@@ -65,6 +65,7 @@ namespace Othello.UnitTests
         [InlineData("a257")]
         [InlineData("a-1")]
         [InlineData("h:8")]
+        [InlineData("8h")]
         public void ConvertInvalidStringToPosition(string stringPosition)
         {
             // Act
@@ -124,14 +125,14 @@ namespace Othello.UnitTests
         {
             // Arrange
             Position fromPosition = (Position)from;
-            
+
             // Act
             var nextPosition = fromPosition.NextPositionInDirection(direction);
 
             // Assert
             nextPosition.Should()
                 .BeOfType<InvalidPosition>();
-            
+
             ((string)nextPosition).Should()
                 .Be(to);
         }
