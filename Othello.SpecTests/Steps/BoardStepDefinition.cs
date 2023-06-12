@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Othello.RuleEngine;
 using Othello.ValueObjects;
+using Othello.ValueObjects.Players;
 using System;
 using System.Linq;
 using TechTalk.SpecFlow;
@@ -10,7 +11,7 @@ namespace Othello.SpecTests.Steps
     [Binding]
     public sealed class BoardStepDefinition
     {
-        private const string BoardKey = "board";
+        private const string CurrentGameKey = "game";
         private const string ErrorKey = "error";
 
         private readonly ScenarioContext scenarioContext;
@@ -21,60 +22,50 @@ namespace Othello.SpecTests.Steps
         }
 
 
-        [Given(@"an initial Othello board is created")]
-        public void GivenAnInitialOthelloBoardIsCreated()
+        [Given(@"a new game of Othello")]
+        public void GivenANewOthelloGame()
         {
-            CreateInitialBoard();
+            StartOthelloGame();
         }
 
-        [Given(@"an initial (.+)x(?:.+) board is created")]
-        public void GivenAnInitialBoardIsCreated(string dimensionToParse)
+        [Given(@"a new game of Othello with a (\d+)x(\d+) board")]
+        public void GivenANewOthelloGameWithADimensionBoard(int dimension1, int dimension2)
         {
-            int dimension = int.Parse(dimensionToParse);
-            CreateInitialBoard(dimension);
+            dimension2.Should()
+                .Be(dimension1, "only square Othello boards are allowed.");
+
+            StartOthelloGame((Dimension)dimension1);
         }
 
-        [Given(@"(Black|White) placed a disc in square ([a-z]\d)")]
-        public void GivenPlayerPlacedADiscInSquare(string player, string position)
+        [Given(@"(Black|White|player) placed a disc in square ([a-z]\d)")]
+        public void GivenPlayerPlacedADiscInSquare(string expectedPlayer, string position)
         {
-            var board = GetBoard();
-            ColorSide color = ColorForPlayer(player);
+            var game = GetCurrentGame();
+            CheckPlayerIs(game.CurrentPlayer, expectedPlayer);
 
-            board.PlayerMakesMoveAt(color, (Position)position);
+            game.CurrentPlayerMakesMoveAt((Position)position);
         }
 
-        [When(@"I create an initial Othello board")]
-        public void WhenICreateAnInitialOthelloBoard()
+        [When(@"(Black|White|player) places a disc in square ([a-z]\d)")]
+        public void WhenPlayerPlacesADiscInSquarePosition(string expectedPlayer, string position)
         {
-            CreateInitialBoard();
+            var game = GetCurrentGame();
+            CheckPlayerIs(game.CurrentPlayer, expectedPlayer);
+
+            game.CurrentPlayerMakesMoveAt((Position)position);
         }
 
-        [When(@"I create an initial (.+)x(?:.+) board")]
-        public void WhenICreateAnInitialBoard(string dimensionToParse)
+        [When(@"(Black|White|player) tries to place a disc in square ([a-z]\d)")]
+        public void WhenPlayerTriesToPlaceADiscInSquarePosition(string expectedPlayer, string position)
         {
-            int dimension = int.Parse(dimensionToParse);
-            CreateInitialBoard(dimension);
-        }
+            var game = GetCurrentGame();
+            CheckPlayerIs(game.CurrentPlayer, expectedPlayer);
 
-        [When(@"(Black|White) places a disc in square ([a-z]\d)")]
-        public void WhenPlayerPlacesADiscInSquare(string player, string position)
-        {
-            var board = GetBoard();
-            ColorSide disc = ColorForPlayer(player);
-
-            board.PlayerMakesMoveAt(disc, (Position)position);
-        }
-
-        [When(@"(.+) tries to place a disc in square ([a-z]\d)")]
-        public void WhenPlayerTriesToPlaceADiscInSquare(string player, string position)
-        {
-            var board = GetBoard();
-            var disc = ColorForPlayer(player);
             var validatedPosition = (Position)position;
 
             try
             {
-                board.PlayerMakesMoveAt(disc, validatedPosition);
+                game.CurrentPlayerMakesMoveAt(validatedPosition);
             }
             catch (Exception e)
             {
@@ -86,7 +77,7 @@ namespace Othello.SpecTests.Steps
         [Then(@"the board should be like this")]
         public void ThenTheBoardShouldBeLikeThis(Table table)
         {
-            var board = GetBoard();
+            var game = GetCurrentGame();
 
             foreach (var row in table.Rows)
             {
@@ -94,14 +85,14 @@ namespace Othello.SpecTests.Steps
 
                 foreach (var columnHeader in table.Header.Skip(1))
                 {
-                    var expectedDiscSideUp = row[columnHeader];
+                    var expectedSquareContents = row[columnHeader];
                     string position = columnHeader + rowHeader;
 
-                    board[(Position)position]
-                        .ToString()
-                        .Trim()
+                    var squareContents = game.ContentsOfSquareAt((Position)position);
+                    squareContents
                         .Should()
-                        .Be(expectedDiscSideUp, $"{expectedDiscSideUp} disc is expected at {position}");
+                        .Be(expectedSquareContents,
+                            $"{expectedSquareContents} disc is expected at {position}, not {squareContents ?? "-"}.");
                 }
             }
 
@@ -111,48 +102,60 @@ namespace Othello.SpecTests.Steps
         [Then(@"an error is issued saying ""(.*)""")]
         public void ThenAnErrorIsIssuedSaying(string errorMessage)
         {
-            var error = GetError();
-            error.Message
+            var error = TryGetError();
+            error.Should()
+                .NotBeNull("the error was probably not raised.");
+
+            error!.Message
                 .Should()
                 .Be(errorMessage);
         }
 
-        private static ColorSide ColorForPlayer(string player)
+        private void StartOthelloGame(Dimension? dimension = null)
         {
-            return player switch
-            {
-                "Black" => ColorSide.Black,
-                "White" => ColorSide.White,
-                _ => throw new NotSupportedException()
-            };
+            var game = new Game(dimension ?? Dimension.Default, new HumanPlayer(ColorSide.Black), new HumanPlayer(ColorSide.White));
+
+            scenarioContext.Add(CurrentGameKey, game);
         }
 
-        private void CreateInitialBoard()
+        private Game GetCurrentGame()
         {
-            var board = new Board(Dimension.Default);
-            scenarioContext.Add(BoardKey, board);
+            return scenarioContext.Get<Game>(CurrentGameKey);
         }
-        private void CreateInitialBoard(int dimension)
+
+        private static ColorSide? GetColorOf(string player)
         {
-            var board = new Board((Dimension)dimension);
-            scenarioContext.Add(BoardKey, board);
-        }
-        private Board GetBoard()
-        {
-            return scenarioContext.Get<Board>(BoardKey);
+            return player.ToLower() switch
+            {
+                "black" => ColorSide.Black,
+                "white" => ColorSide.White,
+                _ => null
+            };
         }
 
         private void StoreError(Exception e)
         {
             scenarioContext.Add(ErrorKey, e);
         }
-        private Exception GetError()
+        private Exception? TryGetError()
         {
             if (!scenarioContext.ContainsKey(ErrorKey))
-                throw new SpecFlowException("No error was raised.");
+                return null;
 
             return scenarioContext.Get<Exception>(ErrorKey);
         }
+
+        private static void CheckPlayerIs(Player currentPlayer, string expectedPlayer)
+        {
+            var expectedPlayerColor = GetColorOf(expectedPlayer);
+            if (expectedPlayerColor.HasValue)
+            {
+                currentPlayer.Color
+                    .Should()
+                    .Be(expectedPlayerColor.Value);
+            }
+        }
+
         private void CheckNoError()
         {
             scenarioContext.ContainsKey(ErrorKey)

@@ -1,7 +1,7 @@
 ﻿Feature: Place a disc on the board (4x4)
 
 Background: 
-	Given an initial 4x4 board is created
+	Given a new game of Othello with a 4x4 board
 
 Scenario: First move: Black places a disc in a2 on the initial board which should flip the sandwiched white disc in b2
 	When Black places a disc in square a2 

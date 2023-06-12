@@ -1,5 +1,6 @@
 ﻿using Othello.RuleEngine;
 using Othello.ValueObjects;
+using Othello.ValueObjects.Players;
 using System;
 using System.Text;
 
@@ -34,7 +35,7 @@ namespace Othello.ConsoleApp
             Console.WriteLine("I, the Computer, am playing White \u25CB.");
             Console.WriteLine("You begin.");
             
-            var board = new Board((Dimension)8);
+            var game = new Game((Dimension)8, new HumanPlayer(ColorSide.Black), new HumanPlayer(ColorSide.White));
         }
     }
 }

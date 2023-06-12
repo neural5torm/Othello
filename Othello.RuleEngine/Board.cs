@@ -1,12 +1,13 @@
 ﻿using Othello.ValueObjects;
 using Othello.ValueObjects.Exceptions;
+using Othello.ValueObjects.Players;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Othello.RuleEngine
 {
-    public class Board
+    internal class Board
     {
         private readonly Dictionary<Position, Square> squares = new();
         public Dimension Dimension { get; init; }
@@ -33,13 +34,13 @@ namespace Othello.RuleEngine
             }
         }
 
-        public void PlayerMakesMoveAt(ColorSide playerColor/*TODO: use player to determine side*/, Position position)
+        public void MakeMove(Player player, Position position)
         {
             if (CountFilledSquaresAdjacentTo(position) == 0)
                 throw new InvalidMoveException("Your disc must be adjacent to another one (vertically, horizontally or diagonally).");//TODO: create specific exception
 
             var square = this[position];
-            var playerDisc = square.PlaceADiscWith(playerColor);
+            var playerDisc = square.PlaceADiscWith(player.Color);
 
             var sandwichedOpponentDiscs = SearchOpponentDiscsSandwichedBy(playerDisc);
             if (sandwichedOpponentDiscs.Count == 0)
@@ -147,6 +148,11 @@ namespace Othello.RuleEngine
             {
                 centerBlackSquare.PlaceADiscWith(ColorSide.Black);
             }
+        }
+
+        public void CheckPlayerCanPass(Player currentPlayer)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿Feature: Create Othello board
 	
 Scenario: Creating a standard initial Othello board should display an 8x8 grid of empty squares except for its 2x2 center containing the initial black and white discs
-	When I create an initial Othello board
+	Given a new game of Othello
 	Then the board should be like this
 	|   | a | b | c | d | e | f | g | h |
 	| 1 |   |   |   |   |   |   |   |   |
@@ -14,7 +14,7 @@ Scenario: Creating a standard initial Othello board should display an 8x8 grid o
 	| 8 |   |   |   |   |   |   |   |   |
 
 Scenario: Creating an initial 4x4 Othello board should display a 4x4 grid of empty squares except for its 2x2 center containing the initial black and white discs
-	When I create an initial 4x4 Othello board
+	Given a new game of Othello with a 4x4 board
 	Then the board should be like this
 	|   | a | b | c | d |
 	| 1 |   |   |   |   |
@@ -23,14 +23,14 @@ Scenario: Creating an initial 4x4 Othello board should display a 4x4 grid of emp
 	| 4 |   |   |   |   |
 
 Scenario: Creating an initial 2x2 Othello board should display a 2x2 grid containing the initial black and white discs
-	When I create an initial 2x2 Othello board
+	Given a new game of Othello with a 2x2 board
 	Then the board should be like this
 	|   | a | b | 
 	| 1 | W | B | 
 	| 2 | B | W | 
 	
 Scenario: Creating a 10x10 initial Othello board should display a 10x10 grid of empty squares except for its 2x2 center containing the initial black and white discs
-	When I create an initial 10x10 Othello board
+	Given a new game of Othello with a 10x10 board
 	Then the board should be like this
 	|    | a | b | c | d | e | f | g | h | i | j |
 	| 1  |   |   |   |   |   |   |   |   |   |   |
