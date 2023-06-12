@@ -54,7 +54,10 @@ Scenario: Cannot place a disc in a position that is not (8-way) adjacent to any 
 	| g4                    | White  |
 	| h8                    | White  |
 
-# Scenario: White cannot place a disc first (Black always plays first in Othello)
+
+Scenario: White cannot make a valid move first (Black always plays first in Othello)
+	When White tries to place a disc in square 3e
+	Then an error is issued saying "Black must make their move first."
 
 # Scenario: Current player cannot pass if he has at least one legal move
 
@@ -62,11 +65,11 @@ Scenario: Cannot place a disc in a position that is not (8-way) adjacent to any 
 
 # Scenario: Player cannot place a disc if he has no legal move 
 
-#TODO
-# check player can pass and opponent can thus play twice (valid case, move somewhere else)
+#TODO Pass / Game over
+# check player can pass and opponent can thus play twice
 # check game is over if both players must pass twice in a row (+players can no longer place any disk)
 # check game is over if board is full (+players can no longer place any disk)
 
-#TODO Keep scores
+#TODO Keeping scores
 # check scores are updated after each move accordingly
 # check winner has the most points, loser the least and tie is equal (+handicap? +add points for all remaining empty squares)
