@@ -21,6 +21,9 @@ public class Game
     {
         this.board = new Board(dimension);
 
+        if (firstPlayer.Color != ColorSide.Black)
+            throw new InvalidSetupException("Black must play first.");
+
         CurrentPlayer =
             FirstPlayer = firstPlayer;
         SecondPlayer = secondPlayer;
@@ -39,7 +42,7 @@ public class Game
     }
 
     public string ContentsOfSquareAt(Position position) =>
-        board[position].ToString().Trim();
+        board[position].ToString();
 
     private void ToggleCurrentPlayer()
     {
